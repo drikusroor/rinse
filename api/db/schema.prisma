@@ -8,15 +8,6 @@ generator client {
   binaryTargets = "native"
 }
 
-// Define your own datamodels here and run `yarn redwood prisma migrate dev`
-// to create migrations for them and apply to your dev DB.
-// TODO: Please remove the following example:
-model UserExample {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-}
-
 model User {
   id                  Int              @id @default(autoincrement())
   email               String           @unique
@@ -26,6 +17,7 @@ model User {
   resetTokenExpiresAt DateTime?
   webAuthnChallenge   String?          @unique
   credentials         UserCredential[]
+  Deck                Deck[]
 }
 
 model UserCredential {
@@ -35,4 +27,45 @@ model UserCredential {
   publicKey  Bytes
   transports String?
   counter    BigInt
+}
+
+model Flashcard {
+  id        Int      @id @default(autoincrement())
+  deckId    Int
+  deck      Deck     @relation(fields: [deckId], references: [id])
+  front     String
+  back      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Deck {
+  id           Int            @id @default(autoincrement())
+  userId       Int
+  user         User           @relation(fields: [userId], references: [id])
+  name         String
+  description  String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  Flashcard    Flashcard[]
+  StudySetDeck StudySetDeck[]
+}
+
+model StudySet {
+  id           Int            @id @default(autoincrement())
+  deckId       Int
+  name         String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  StudySetDeck StudySetDeck[]
+}
+
+model StudySetDeck {
+  id         Int      @id @default(autoincrement())
+  studySetId Int
+  studySet   StudySet @relation(fields: [studySetId], references: [id])
+  deckId     Int
+  deck       Deck     @relation(fields: [deckId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
