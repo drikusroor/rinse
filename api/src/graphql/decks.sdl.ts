@@ -22,6 +22,11 @@ export const schema = gql`
     description: String
   }
 
+  input CreateUserDeckInput {
+    name: String!
+    description: String
+  }
+
   input UpdateDeckInput {
     userId: Int
     name: String
@@ -30,6 +35,7 @@ export const schema = gql`
 
   type Mutation {
     createDeck(input: CreateDeckInput!): Deck! @requireAuth
+    createUserDeck(input: CreateUserDeckInput!): Deck! @requireAuth
     updateDeck(id: Int!, input: UpdateDeckInput!): Deck! @requireAuth
     deleteDeck(id: Int!): Deck! @requireAuth
   }

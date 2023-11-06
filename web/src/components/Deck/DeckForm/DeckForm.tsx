@@ -35,22 +35,6 @@ const DeckForm = (props: DeckFormProps) => {
           listClassName="rw-form-error-list"
         />
 
-        <Label
-          name="userId"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          User id
-        </Label>
-
-        <NumberField
-          name="userId"
-          defaultValue={props.deck?.userId}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-
         <FieldError name="userId" className="rw-field-error" />
 
         <Label

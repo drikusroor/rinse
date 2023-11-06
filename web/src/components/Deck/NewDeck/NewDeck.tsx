@@ -7,8 +7,8 @@ import DeckForm from 'src/components/Deck/DeckForm'
 import type { CreateDeckInput } from 'types/graphql'
 
 const CREATE_DECK_MUTATION = gql`
-  mutation CreateDeckMutation($input: CreateDeckInput!) {
-    createDeck(input: $input) {
+  mutation CreateUserDeckMutation($input: CreateUserDeckInput!) {
+    createUserDeck(input: $input) {
       id
     }
   }
