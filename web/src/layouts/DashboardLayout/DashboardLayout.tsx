@@ -13,7 +13,7 @@ const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
   const { currentUser } = useAuth()
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-slate-400">
       {/* Navbar */}
       <nav className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -100,7 +100,7 @@ const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
         <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
           {/* Replace with your content */}
           <div className="px-4 py-6 sm:px-0">
-            <div className="border-4 border-dashed border-gray-200 rounded-lg h-96">
+            <div className="">
               {children} {/* Placeholder for page content */}
             </div>
           </div>
