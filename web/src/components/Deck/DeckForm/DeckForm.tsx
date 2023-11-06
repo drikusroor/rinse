@@ -6,10 +6,14 @@ import {
   NumberField,
   TextField,
   Submit,
+  ButtonField,
 } from '@redwoodjs/forms'
 
 import type { EditDeckById, UpdateDeckInput } from 'types/graphql'
 import type { RWGqlError } from '@redwoodjs/forms'
+import FlashCardFormItem from 'src/components/FlashCardFormItem/FlashCardFormItem'
+import FlashcardForm from 'src/components/Flashcard/FlashcardForm/FlashcardForm'
+import FlashcardFormInputs from 'src/components/DeckFlashcardForm/DeckFlashcardForm'
 
 type FormDeck = NonNullable<EditDeckById['deck']>
 
@@ -21,9 +25,28 @@ interface DeckFormProps {
 }
 
 const DeckForm = (props: DeckFormProps) => {
+
+  const [flashcards, setFlashcards] = React.useState<FormDeck['flashcards']>(props.deck?.flashcards || [])
+
+  const onAddFlashCard = (data) => {
+
+    const flashcard = {
+      ...data,
+    }
+
+    const deckId = props.deck?.id
+
+    if (deckId) {
+      flashcard.deckId = deckId
+    }
+
+    setFlashcards([...flashcards, data])
+  }
+
   const onSubmit = (data: FormDeck) => {
     props.onSave(data, props?.deck?.id)
   }
+
 
   return (
     <div className="rw-form-wrapper">
@@ -72,8 +95,24 @@ const DeckForm = (props: DeckFormProps) => {
 
         <FieldError name="description" className="rw-field-error" />
 
-        <div className="rw-button-group">
-          <Submit disabled={props.loading} className="rw-button rw-button-blue">
+        <div className="bg-gray-200 p-5 mt-5 border rounded-lg">
+
+          <h3 className="text-xl font-bold mt-5">
+            Flashcards
+          </h3>
+
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {flashcards.map((flashcard, index) => (
+              <FlashCardFormItem key={index} flashcard={flashcard} setFlashcards={setFlashcards} />
+            ))}
+          </div>
+
+          <FlashcardFormInputs onSave={onAddFlashCard} error={null} loading={false} />
+
+        </div>
+
+        <div className="mt-5">
+          <Submit disabled={props.loading} className="rw-button rw-button-blue mx-auto">
             Save
           </Submit>
         </div>
