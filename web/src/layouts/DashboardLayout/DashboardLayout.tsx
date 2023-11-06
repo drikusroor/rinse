@@ -23,7 +23,7 @@ const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
                 {/* Logo area */}
               </div>
               {currentUser && (
-                <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
+                <div className="hidden sm:-my-px sm:flex sm:space-x-8">
                   {/* Navigation Links */}
                   <Link to={routes.decks()} className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
                     Decks
@@ -78,7 +78,6 @@ const DashboardLayout = ({ children, title }: DashboardLayoutProps) => {
                         </>
                       )}
                     </ul>
-
                   </div>
                 </div>
               </div>
