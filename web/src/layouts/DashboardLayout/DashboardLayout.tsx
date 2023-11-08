@@ -23,7 +23,11 @@ const DashboardLayout = ({
   const { currentUser } = useAuth()
 
   return (
-    <div className="min-h-screen bg-slate-400">
+    <div className="relative min-h-screen">
+      <div className="absolute inset-0 mix-blend-overlay">
+        <div className="absolute inset-0 bg-grainy bg-10% opacity-30"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-aqua to-salmon-light mix-blend-multiply"></div>
+      </div>
       {/* Navbar */}
       <nav className="bg-white shadow">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -55,7 +59,7 @@ const DashboardLayout = ({
                 <div className="group inline-block text-left">
                   <button
                     type="button"
-                    className="flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="flex rounded-full bg-sand text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     id="user-menu"
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -71,7 +75,7 @@ const DashboardLayout = ({
                       </div>
                     )}
                   </button>
-                  <div className="absolute right-0 hidden group-hover:block">
+                  <div className="absolute right-0 z-10 hidden group-hover:block">
                     <ul
                       className="mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5"
                       role="menu"
@@ -139,20 +143,20 @@ const DashboardLayout = ({
       </nav>
 
       {/* Page Header */}
-      <header className="">
+      <header>
         <div className="relative mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="pr-10 text-3xl font-bold leading-tight text-gray-900">
+          <h1 className="pr-10 font-display text-3xl font-bold leading-tight text-sand">
             {title}
           </h1>
           {addNewButton && (
             <Link
               to={addNewButton.to()}
-              className="absolute right-2 top-0 mr-6 mt-6 cursor-pointer"
+              className="group absolute right-2 top-0 z-0 mr-6 mt-6 cursor-pointer"
               title={addNewButton.label}
               aria-label={addNewButton.label}
             >
               <span className="sr-only">{addNewButton.label}</span>
-              <FaPlusCircle className="h-8 w-8 rounded-full border-2 bg-white text-blue-500 transition duration-150 ease-in-out hover:scale-110 hover:text-blue-700" />
+              <FaPlusCircle className="h-8 w-8 rounded-full border-2 border-sand bg-sand fill-forest transition duration-150 ease-in-out hover:scale-110 group-hover:fill-aqua" />
             </Link>
           )}
         </div>

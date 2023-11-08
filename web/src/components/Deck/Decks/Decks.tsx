@@ -37,28 +37,28 @@ const DecksList = ({ decks }: FindDecks) => {
   }
 
   return (
-    <div className="rw-segment rw-table-wrapper-responsive">
+    <div className="rw-segment rw-table-wrapper-responsive bg-sand drop-shadow-2xl">
       <table className="rw-table">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>User id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Flashcards</th>
-            <th>Created at</th>
-            <th>Updated at</th>
-            <th>&nbsp;</th>
+            <th className="!bg-transparent">Id</th>
+            <th className="!bg-transparent">User id</th>
+            <th className="!bg-transparent">Name</th>
+            <th className="!bg-transparent">Description</th>
+            <th className="!bg-transparent">Flashcards</th>
+            <th className="!bg-transparent">Created at</th>
+            <th className="!bg-transparent">Updated at</th>
+            <th className="!bg-transparent">&nbsp;</th>
           </tr>
         </thead>
         <tbody>
           {decks.map((deck) => (
             <tr key={deck.id}>
-              <td>{truncate(deck.id)}</td>
-              <td>{truncate(deck.userId)}</td>
-              <td>{truncate(deck.name)}</td>
-              <td>{truncate(deck.description)}</td>
-              <td>
+              <td className="!bg-transparent">{truncate(deck.id)}</td>
+              <td className="!bg-transparent">{truncate(deck.userId)}</td>
+              <td className="!bg-transparent">{truncate(deck.name)}</td>
+              <td className="!bg-transparent">{truncate(deck.description)}</td>
+              <td className="!bg-transparent">
                 <span
                   title={deck.flashcards?.length.toString()}
                   className="rounded-full bg-blue-500 px-2 text-white"
@@ -66,9 +66,9 @@ const DecksList = ({ decks }: FindDecks) => {
                   {truncate(deck.flashcards?.length)}
                 </span>
               </td>
-              <td>{timeTag(deck.createdAt)}</td>
-              <td>{timeTag(deck.updatedAt)}</td>
-              <td>
+              <td className="!bg-transparent">{timeTag(deck.createdAt)}</td>
+              <td className="!bg-transparent">{timeTag(deck.updatedAt)}</td>
+              <td className="!bg-transparent">
                 <nav className="rw-table-actions">
                   <Link
                     to={routes.deck({ id: deck.id })}

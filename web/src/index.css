@@ -11,3 +11,8 @@
 /**
  * END --- SETUP TAILWINDCSS EDIT
  */
+
+@font-face {
+  font-family: 'Rammetto One';
+  src: url('/fonts/Black_Han_Sans/BlackHanSans-Regular.ttf');
+}
