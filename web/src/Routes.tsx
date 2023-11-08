@@ -10,14 +10,13 @@
 import { Set, Router, Route, routes } from '@redwoodjs/router'
 
 import DashboardLayout from 'src/layouts/DashboardLayout'
-import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 
 import { useAuth } from './auth'
 
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
-      <Set wrap={DashboardLayout} title="Study Sets" addNewButton={{ to: routes.newStudySet(), label: 'New Study Set' }}>
+      <Set wrap={DashboardLayout} title="Study Sets" addNewButton={{ to: routes.newStudySet, label: 'New Study Set' }}>
         <Route path="/study-sets/new" page={StudySetNewStudySetPage} name="newStudySet" />
         <Route path="/study-sets/{id:Int}/edit" page={StudySetEditStudySetPage} name="editStudySet" />
         <Route path="/study-sets/{id:Int}" page={StudySetStudySetPage} name="studySet" />
@@ -35,7 +34,7 @@ const Routes = () => {
         <Route path="/flashcards/{id:Int}" page={FlashcardFlashcardPage} name="flashcard" />
         <Route path="/flashcards" page={FlashcardFlashcardsPage} name="flashcards" />
       </Set>
-      <Set wrap={DashboardLayout} title="Decks" addNewButton={{ to: routes.newDeck(), label: 'New Deck' }}>
+      <Set wrap={DashboardLayout} title="Decks" addNewButton={{ to: routes.newDeck, label: 'New Deck' }}>
         <Route path="/decks/new" page={DeckNewDeckPage} name="newDeck" />
         <Route path="/decks/{id:Int}/edit" page={DeckEditDeckPage} name="editDeck" />
         <Route path="/decks/{id:Int}" page={DeckDeckPage} name="deck" />

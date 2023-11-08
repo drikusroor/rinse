@@ -5,7 +5,7 @@ import { Link, routes } from '@redwoodjs/router'
 import { useAuth } from 'src/auth'
 
 interface AddNewButton {
-  to: string
+  to: () => string
   label: string
 }
 
@@ -146,7 +146,7 @@ const DashboardLayout = ({
           </h1>
           {addNewButton && (
             <Link
-              to={addNewButton.to}
+              to={addNewButton.to()}
               className="absolute right-2 top-0 mr-6 mt-6 cursor-pointer"
               title={addNewButton.label}
               aria-label={addNewButton.label}
