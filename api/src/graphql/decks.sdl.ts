@@ -25,7 +25,7 @@ export const schema = gql`
   input CreateUserDeckInput {
     name: String!
     description: String
-    flashcards: [CreateFlashcardInput!]
+    flashcards: [CreateDeckFlashcardInput!]
   }
 
   input UpdateDeckInput {

@@ -20,6 +20,11 @@ export const schema = gql`
     back: String!
   }
 
+  input CreateDeckFlashcardInput {
+    front: String!
+    back: String!
+  }
+
   input UpdateFlashcardInput {
     deckId: Int
     front: String

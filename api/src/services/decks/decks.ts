@@ -27,9 +27,14 @@ export const createUserDeck: MutationResolvers['createUserDeck'] = ({
 }) => {
   const { currentUser } = context
 
+  const { flashcards, ...rest } = input
+
   return db.deck.create({
     data: {
-      ...input,
+      ...rest,
+      flashcards: {
+        create: flashcards,
+      },
       user: {
         connect: {
           id: currentUser?.id,
