@@ -24,8 +24,8 @@ const DashboardLayout = ({
 
   return (
     <div className="relative min-h-screen">
-      <div className="absolute inset-0 mix-blend-overlay">
-        <div className="absolute inset-0 bg-grainy bg-10% opacity-30"></div>
+      <div className="pointer-events-none absolute inset-0 mix-blend-overlay">
+        <div className="absolute inset-0 bg-grainy bg-10%"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-aqua to-salmon-light mix-blend-multiply"></div>
       </div>
       {/* Navbar */}
