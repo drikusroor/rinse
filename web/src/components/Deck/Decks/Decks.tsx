@@ -1,11 +1,11 @@
+import type { DeleteDeckMutationVariables, FindDecks } from 'types/graphql'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Deck/DecksCell'
 import { timeTag, truncate } from 'src/lib/formatters'
-
-import type { DeleteDeckMutationVariables, FindDecks } from 'types/graphql'
 
 const DELETE_DECK_MUTATION = gql`
   mutation DeleteDeckMutation($id: Int!) {
@@ -45,6 +45,7 @@ const DecksList = ({ decks }: FindDecks) => {
             <th>User id</th>
             <th>Name</th>
             <th>Description</th>
+            <th>Flashcards</th>
             <th>Created at</th>
             <th>Updated at</th>
             <th>&nbsp;</th>
@@ -57,6 +58,14 @@ const DecksList = ({ decks }: FindDecks) => {
               <td>{truncate(deck.userId)}</td>
               <td>{truncate(deck.name)}</td>
               <td>{truncate(deck.description)}</td>
+              <td>
+                <span
+                  title={deck.flashcards?.length.toString()}
+                  className="rounded-full bg-blue-500 px-2 text-white"
+                >
+                  {truncate(deck.flashcards?.length)}
+                </span>
+              </td>
               <td>{timeTag(deck.createdAt)}</td>
               <td>{timeTag(deck.updatedAt)}</td>
               <td>
