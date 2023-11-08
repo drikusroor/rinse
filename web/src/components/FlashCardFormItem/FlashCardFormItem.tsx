@@ -4,13 +4,11 @@ type FlashCardFormItemProps = {
 
 const FlashCardFormItem = ({ flashcard }: FlashCardFormItemProps) => {
   return (
-    <div className="bg-amber-500 p-3 mt-3 border rounded-lg">
-      <h3 className="bg-amber-400 p-3 border rounded-lg">
-        {flashcard?.front}
-        </h3>
-      <h3 className="bg-amber-400 p-3 mt-3 border rounded-lg">
+    <div className="mt-3 rounded-lg border bg-amber-500 p-3">
+      <h3 className="rounded-lg border bg-amber-400 p-3">{flashcard?.front}</h3>
+      <h3 className="mt-3 rounded-lg border bg-amber-400 p-3">
         {flashcard?.back}
-        </h3>
+      </h3>
     </div>
   )
 }

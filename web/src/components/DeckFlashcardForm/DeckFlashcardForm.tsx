@@ -1,4 +1,4 @@
-import { Label, TextField, FieldError, ButtonField } from "@redwoodjs/forms"
+import { Label, TextField, FieldError, ButtonField } from '@redwoodjs/forms'
 
 type FlashcardFormProps = {
   flashcard?: Flashcard
@@ -7,12 +7,18 @@ type FlashcardFormProps = {
   loading: boolean
 }
 
-const FlashcardFormInputs = ({ flashcard, onSave, error, loading }: FlashcardFormProps) => {
-
-  const [state, setState] = React.useState<FlashcardFormProps>(flashcard || {
-    front: '',
-    back: '',
-  })
+const FlashcardFormInputs = ({
+  flashcard,
+  onSave,
+  error,
+  loading,
+}: FlashcardFormProps) => {
+  const [state, setState] = React.useState<FlashcardFormProps>(
+    flashcard || {
+      front: '',
+      back: '',
+    }
+  )
 
   return (
     <>
@@ -54,8 +60,13 @@ const FlashcardFormInputs = ({ flashcard, onSave, error, loading }: FlashcardFor
 
       <FieldError name="back" className="rw-field-error" />
 
-      <button type="button" className="rw-button rw-button-blue my-3"
-        onClick={() => onSave(state)}>Add flashcard</button>
+      <button
+        type="button"
+        className="rw-button rw-button-blue my-3"
+        onClick={() => onSave(state)}
+      >
+        Add flashcard
+      </button>
     </>
   )
 }

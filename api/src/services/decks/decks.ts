@@ -25,7 +25,6 @@ export const createDeck: MutationResolvers['createDeck'] = ({ input }) => {
 export const createUserDeck: MutationResolvers['createUserDeck'] = ({
   input,
 }) => {
-
   const { currentUser } = context
 
   return db.deck.create({
@@ -36,13 +35,35 @@ export const createUserDeck: MutationResolvers['createUserDeck'] = ({
           id: currentUser?.id,
         },
       },
-    }
+    },
   })
 }
 
-export const updateDeck: MutationResolvers['updateDeck'] = ({ id, input }) => {
+export const updateDeck: MutationResolvers['updateUserDeck'] = ({
+  id,
+  input,
+}) => {
   return db.deck.update({
     data: input,
+    where: { id },
+  })
+}
+
+export const updateUserDeck: MutationResolvers['updateUserDeck'] = ({
+  id,
+  input,
+}) => {
+  return db.deck.update({
+    data: {
+      ...input,
+      flashcards: {
+        upsert: input.flashcards.map((flashcard) => ({
+          where: { id: flashcard.id ? flashcard.id : 0 },
+          create: flashcard,
+          update: flashcard,
+        })),
+      },
+    },
     where: { id },
   })
 }
@@ -57,10 +78,10 @@ export const Deck: DeckRelationResolvers = {
   user: (_obj, { root }) => {
     return db.deck.findUnique({ where: { id: root?.id } }).user()
   },
-  Flashcard: (_obj, { root }) => {
-    return db.deck.findUnique({ where: { id: root?.id } }).Flashcard()
+  flashcards: (_obj, { root }) => {
+    return db.deck.findUnique({ where: { id: root?.id } }).flashcards()
   },
-  StudySetDeck: (_obj, { root }) => {
-    return db.deck.findUnique({ where: { id: root?.id } }).StudySetDeck()
+  studySetDecks: (_obj, { root }) => {
+    return db.deck.findUnique({ where: { id: root?.id } }).studySetDecks()
   },
 }

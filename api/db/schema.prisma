@@ -47,8 +47,8 @@ model Deck {
   description  String?
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
-  Flashcard    Flashcard[]
-  StudySetDeck StudySetDeck[]
+  flashcards    Flashcard[]
+  studySetDecks StudySetDeck[]
 }
 
 model StudySet {
@@ -57,7 +57,7 @@ model StudySet {
   name         String
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
-  StudySetDeck StudySetDeck[]
+  studySetDecks StudySetDeck[]
 }
 
 model StudySetDeck {

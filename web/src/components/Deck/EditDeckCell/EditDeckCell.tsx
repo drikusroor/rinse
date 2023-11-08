@@ -1,4 +1,4 @@
-import type { EditDeckById, UpdateDeckInput } from 'types/graphql'
+import type { EditDeckById, UpdateUserDeckInput } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
@@ -16,12 +16,19 @@ export const QUERY = gql`
       description
       createdAt
       updatedAt
+      flashcards {
+        id
+        front
+        back
+        createdAt
+        updatedAt
+      }
     }
   }
 `
-const UPDATE_DECK_MUTATION = gql`
-  mutation UpdateDeckMutation($id: Int!, $input: UpdateDeckInput!) {
-    updateDeck(id: $id, input: $input) {
+const UPDATE_USER_DECK_MUTATION = gql`
+  mutation UpdateUserDeckMutation($id: Int!, $input: UpdateUserDeckInput!) {
+    updateUserDeck(id: $id, input: $input) {
       id
       userId
       name
@@ -39,17 +46,24 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ deck }: CellSuccessProps<EditDeckById>) => {
-  const [updateDeck, { loading, error }] = useMutation(UPDATE_DECK_MUTATION, {
-    onCompleted: () => {
-      toast.success('Deck updated')
-      navigate(routes.decks())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [updateDeck, { loading, error }] = useMutation(
+    UPDATE_USER_DECK_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Deck updated')
+        navigate(routes.decks())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+      refetchQueries: [{ query: QUERY }],
+    }
+  )
 
-  const onSave = (input: UpdateDeckInput, id: EditDeckById['deck']['id']) => {
+  const onSave = (
+    input: UpdateUserDeckInput,
+    id: EditDeckById['deck']['id']
+  ) => {
     updateDeck({ variables: { id, input } })
   }
 

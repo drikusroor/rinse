@@ -26,6 +26,12 @@ export const schema = gql`
     back: String
   }
 
+  input UpdateDeckFlashcardInput {
+    id: Int
+    front: String
+    back: String
+  }
+
   type Mutation {
     createFlashcard(input: CreateFlashcardInput!): Flashcard! @requireAuth
     updateFlashcard(id: Int!, input: UpdateFlashcardInput!): Flashcard!

@@ -1,19 +1,17 @@
+import type { EditDeckById, UpdateDeckInput } from 'types/graphql'
+
 import {
   Form,
   FormError,
   FieldError,
   Label,
-  NumberField,
   TextField,
   Submit,
-  ButtonField,
 } from '@redwoodjs/forms'
-
-import type { EditDeckById, UpdateDeckInput } from 'types/graphql'
 import type { RWGqlError } from '@redwoodjs/forms'
-import FlashCardFormItem from 'src/components/FlashCardFormItem/FlashCardFormItem'
-import FlashcardForm from 'src/components/Flashcard/FlashcardForm/FlashcardForm'
+
 import FlashcardFormInputs from 'src/components/DeckFlashcardForm/DeckFlashcardForm'
+import FlashCardFormItem from 'src/components/FlashCardFormItem/FlashCardFormItem'
 
 type FormDeck = NonNullable<EditDeckById['deck']>
 
@@ -25,11 +23,11 @@ interface DeckFormProps {
 }
 
 const DeckForm = (props: DeckFormProps) => {
-
-  const [flashcards, setFlashcards] = React.useState<FormDeck['flashcards']>(props.deck?.flashcards || [])
+  const [flashcards, setFlashcards] = React.useState<FormDeck['flashcards']>(
+    props.deck?.flashcards || []
+  )
 
   const onAddFlashCard = (data) => {
-
     const flashcard = {
       ...data,
     }
@@ -44,9 +42,20 @@ const DeckForm = (props: DeckFormProps) => {
   }
 
   const onSubmit = (data: FormDeck) => {
-    props.onSave(data, props?.deck?.id)
-  }
+    const { name, description } = data
 
+    const inputData = {
+      name,
+      description,
+      flashcards: flashcards.map((flashcard) => ({
+        id: flashcard.id,
+        front: flashcard.front,
+        back: flashcard.back,
+      })),
+    }
+
+    props.onSave(inputData, props?.deck?.id)
+  }
 
   return (
     <div className="rw-form-wrapper">
@@ -95,24 +104,31 @@ const DeckForm = (props: DeckFormProps) => {
 
         <FieldError name="description" className="rw-field-error" />
 
-        <div className="bg-gray-200 p-5 mt-5 border rounded-lg">
-
-          <h3 className="text-xl font-bold mt-5">
-            Flashcards
-          </h3>
+        <div className="mt-5 rounded-lg border bg-gray-200 p-5">
+          <h3 className="mt-5 text-xl font-bold">Flashcards</h3>
 
           <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
             {flashcards.map((flashcard, index) => (
-              <FlashCardFormItem key={index} flashcard={flashcard} setFlashcards={setFlashcards} />
+              <FlashCardFormItem
+                key={index}
+                flashcard={flashcard}
+                setFlashcards={setFlashcards}
+              />
             ))}
           </div>
 
-          <FlashcardFormInputs onSave={onAddFlashCard} error={null} loading={false} />
-
+          <FlashcardFormInputs
+            onSave={onAddFlashCard}
+            error={null}
+            loading={false}
+          />
         </div>
 
         <div className="mt-5">
-          <Submit disabled={props.loading} className="rw-button rw-button-blue mx-auto">
+          <Submit
+            disabled={props.loading}
+            className="rw-button rw-button-blue mx-auto"
+          >
             Save
           </Submit>
         </div>

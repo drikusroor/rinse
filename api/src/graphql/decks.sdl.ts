@@ -7,8 +7,8 @@ export const schema = gql`
     description: String
     createdAt: DateTime!
     updatedAt: DateTime!
-    Flashcard: [Flashcard]!
-    StudySetDeck: [StudySetDeck]!
+    flashcards: [Flashcard]!
+    studySetDecks: [StudySetDeck]!
   }
 
   type Query {
@@ -25,6 +25,7 @@ export const schema = gql`
   input CreateUserDeckInput {
     name: String!
     description: String
+    flashcards: [CreateFlashcardInput!]
   }
 
   input UpdateDeckInput {
@@ -33,10 +34,17 @@ export const schema = gql`
     description: String
   }
 
+  input UpdateUserDeckInput {
+    name: String
+    description: String
+    flashcards: [UpdateDeckFlashcardInput!]
+  }
+
   type Mutation {
     createDeck(input: CreateDeckInput!): Deck! @requireAuth
     createUserDeck(input: CreateUserDeckInput!): Deck! @requireAuth
     updateDeck(id: Int!, input: UpdateDeckInput!): Deck! @requireAuth
+    updateUserDeck(id: Int!, input: UpdateUserDeckInput!): Deck! @requireAuth
     deleteDeck(id: Int!): Deck! @requireAuth
   }
 `
