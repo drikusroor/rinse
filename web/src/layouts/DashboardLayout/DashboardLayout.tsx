@@ -148,7 +148,7 @@ const DashboardLayout = ({
           <h1 className="pr-10 font-display text-3xl font-bold leading-tight text-sand">
             {title}
           </h1>
-          {addNewButton && (
+          {addNewButton?.to && (
             <Link
               to={addNewButton.to()}
               className="group absolute right-2 top-0 z-0 mr-6 mt-6 cursor-pointer"
