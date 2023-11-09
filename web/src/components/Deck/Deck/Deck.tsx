@@ -1,10 +1,11 @@
+import type { DeleteDeckMutationVariables, FindDeckById } from 'types/graphql'
+
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import PlayFlashcards from 'src/components/PlayFlashcards/PlayFlashcards'
 import { timeTag } from 'src/lib/formatters'
-
-import type { DeleteDeckMutationVariables, FindDeckById } from 'types/graphql'
 
 const DELETE_DECK_MUTATION = gql`
   mutation DeleteDeckMutation($id: Int!) {
@@ -87,6 +88,9 @@ const Deck = ({ deck }: Props) => {
           Delete
         </button>
       </nav>
+      <div className="mt-8">
+        <PlayFlashcards flashcards={deck.flashcards} />
+      </div>
     </>
   )
 }

@@ -13,6 +13,14 @@ export const QUERY = gql`
       description
       createdAt
       updatedAt
+      flashcards {
+        id
+        deckId
+        front
+        back
+        createdAt
+        updatedAt
+      }
     }
   }
 `
