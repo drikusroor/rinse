@@ -17,6 +17,11 @@ const Routes = () => {
   return (
     <Router useAuth={useAuth}>
       <Set private unauthenticated="login">
+        <Set wrap={DashboardLayout} title="Play!">
+          <Route path="/play/decks" page={PlayPage} name="playOverview" />
+          <Route path="/play/decks/{id:Int}" page={PlayPage} name="playDeck" />
+          <Route path="/play/study-set/{id:Int}" page={PlayPage} name="playStudySet" />
+        </Set>
         <Set wrap={DashboardLayout} title="Study Sets" addNewButton={{ to: routes.newStudySet, label: 'New Study Set' }}>
           <Route path="/study-sets/new" page={StudySetNewStudySetPage} name="newStudySet" />
           <Route path="/study-sets/{id:Int}/edit" page={StudySetEditStudySetPage} name="editStudySet" />

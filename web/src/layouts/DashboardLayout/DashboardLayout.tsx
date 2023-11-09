@@ -12,7 +12,7 @@ interface AddNewButton {
 type DashboardLayoutProps = {
   children?: React.ReactNode
   title?: string
-  addNewButton: AddNewButton
+  addNewButton?: AddNewButton
 }
 
 const DashboardLayout = ({
@@ -39,6 +39,14 @@ const DashboardLayout = ({
               {currentUser && (
                 <div className="hidden sm:-my-px sm:flex sm:space-x-8">
                   {/* Navigation Links */}
+                  <Link
+                    to={routes.playOverview()}
+                    className="group inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-semibold text-sand transition-colors hover:text-salmon-light"
+                  >
+                    <span className="rounded bg-forest p-3 transition group-hover:drop-shadow-xl">
+                      Play!
+                    </span>
+                  </Link>
                   <Link
                     to={routes.decks()}
                     className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
