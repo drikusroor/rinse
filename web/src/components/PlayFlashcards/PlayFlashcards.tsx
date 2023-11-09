@@ -36,8 +36,13 @@ const PlayFlashcards = (props: PlayFlashcardsProps) => {
   const [currentFlashcardIndex, setCurrentFlashcardIndex] = React.useState(
     firstFlashcardIndex ? 0 : Math.floor(Math.random() * flashcards.length)
   )
+  const [answerCount, setAnswerCount] = React.useState(0)
+  const [correctCount, setCorrectCount] = React.useState(0)
 
   const onCorrect = async () => {
+    setAnswerCount(answerCount + 1)
+    setCorrectCount(correctCount + 1)
+
     if (answerMode === 'text') {
       await wait(playConfiguration.timeUntilNextFlashcard)
     }
@@ -45,6 +50,8 @@ const PlayFlashcards = (props: PlayFlashcardsProps) => {
   }
 
   const onIncorrect = async () => {
+    setAnswerCount(answerCount + 1)
+
     if (answerMode === 'text') {
       await wait(playConfiguration.timeUntilNextFlashcard)
     }
