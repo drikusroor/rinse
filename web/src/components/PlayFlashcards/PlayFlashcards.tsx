@@ -1,15 +1,19 @@
 import { Flashcard } from 'types/graphql'
 
+import wait from 'src/lib/wait'
+
 import PlayFlashcard from '../PlayFlashcard/PlayFlashcard'
 
 interface PlayConfiguration {
   timeUntilNextFlashcard: number
   amountOfFlashcards?: number
   firstFlashcardIndex?: boolean
+  answerMode?: 'text' | 'manual'
 }
 
 const DEFAULT_PLAY_CONFIGURATION: PlayConfiguration = {
   timeUntilNextFlashcard: 2000,
+  answerMode: 'manual',
 }
 
 type PlayFlashcardsProps = {
@@ -17,21 +21,31 @@ type PlayFlashcardsProps = {
   flashcards: Flashcard[]
 }
 
-const PlayFlashcards = ({
-  playConfiguration = DEFAULT_PLAY_CONFIGURATION,
-  flashcards,
-}: PlayFlashcardsProps) => {
-  const { firstFlashcardIndex } = playConfiguration
+const PlayFlashcards = (props: PlayFlashcardsProps) => {
+  const { flashcards = [] } = props
+
+  const playConfiguration = {
+    ...DEFAULT_PLAY_CONFIGURATION,
+    ...props.playConfiguration,
+  }
+
+  const { firstFlashcardIndex, answerMode } = playConfiguration
 
   const [currentFlashcardIndex, setCurrentFlashcardIndex] = React.useState(
     firstFlashcardIndex ? 0 : Math.floor(Math.random() * flashcards.length)
   )
 
-  const onCorrect = () => {
+  const onCorrect = async () => {
+    if (answerMode === 'text') {
+      await wait(playConfiguration.timeUntilNextFlashcard)
+    }
     setCurrentFlashcardIndex((currentFlashcardIndex + 1) % flashcards.length)
   }
 
-  const onIncorrect = () => {
+  const onIncorrect = async () => {
+    if (answerMode === 'text') {
+      await wait(playConfiguration.timeUntilNextFlashcard)
+    }
     setCurrentFlashcardIndex((currentFlashcardIndex + 1) % flashcards.length)
   }
 
