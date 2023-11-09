@@ -25,11 +25,14 @@ const PlayFlashcard = ({
     <div className="mx-auto max-w-lg rounded-lg bg-gradient-to-br from-sand to-salmon-light p-5 drop-shadow-lg">
       <h2
         className={classNames(
-          'text-center',
+          'relative text-center',
           !flipped ? 'text-2xl font-bold' : 'text-sm text-gray-500'
         )}
       >
         {flashcard.front}
+        {flipped && (
+          <div className="absolute left-1/2 top-full h-1/2 w-[1px] translate-x-1/2 bg-gray-500 text-xs"></div>
+        )}
       </h2>
 
       {flipped && (
