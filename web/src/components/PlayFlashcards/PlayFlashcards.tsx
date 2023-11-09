@@ -19,7 +19,7 @@ const DEFAULT_PLAY_CONFIGURATION: PlayConfiguration = {
 }
 
 type PlayFlashcardsProps = {
-  playConfiguration: PlayConfiguration
+  playConfiguration?: PlayConfiguration
   flashcards: Flashcard[]
 }
 

@@ -5,7 +5,7 @@ export const schema = gql`
     name: String!
     createdAt: DateTime!
     updatedAt: DateTime!
-    StudySetDeck: [StudySetDeck]!
+    studySetDecks: [StudySetDeck]!
   }
 
   type Query {
