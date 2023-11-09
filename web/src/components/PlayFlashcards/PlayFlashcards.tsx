@@ -9,11 +9,13 @@ interface PlayConfiguration {
   amountOfFlashcards?: number
   firstFlashcardIndex?: boolean
   answerMode?: 'text' | 'manual'
+  inverse?: boolean
 }
 
 const DEFAULT_PLAY_CONFIGURATION: PlayConfiguration = {
   timeUntilNextFlashcard: 2000,
   answerMode: 'manual',
+  inverse: false,
 }
 
 type PlayFlashcardsProps = {
@@ -29,7 +31,7 @@ const PlayFlashcards = (props: PlayFlashcardsProps) => {
     ...props.playConfiguration,
   }
 
-  const { firstFlashcardIndex, answerMode } = playConfiguration
+  const { answerMode, firstFlashcardIndex, inverse } = playConfiguration
 
   const [currentFlashcardIndex, setCurrentFlashcardIndex] = React.useState(
     firstFlashcardIndex ? 0 : Math.floor(Math.random() * flashcards.length)
@@ -51,6 +53,7 @@ const PlayFlashcards = (props: PlayFlashcardsProps) => {
 
   return (
     <PlayFlashcard
+      inverse={inverse}
       flashcard={flashcards[currentFlashcardIndex]}
       onCorrect={onCorrect}
       onIncorrect={onIncorrect}

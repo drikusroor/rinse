@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { FaRecycle } from 'react-icons/fa'
 import { Flashcard } from 'types/graphql'
 
@@ -8,18 +10,23 @@ type PlayFlashcardProps = {
   flashcard: Flashcard
   onCorrect: () => void
   onIncorrect: () => void
+  inverse?: boolean
 }
 
 const PlayFlashcard = ({
   flashcard,
   onCorrect,
   onIncorrect,
+  inverse = false,
 }: PlayFlashcardProps) => {
   const [flipped, setFlipped] = React.useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     setFlipped(false)
   }, [flashcard])
+
+  const front = inverse ? flashcard.back : flashcard.front
+  const back = inverse ? flashcard.front : flashcard.back
 
   return (
     <div className="mx-auto max-w-lg rounded-lg bg-gradient-to-br from-sand to-salmon-light p-5 drop-shadow-lg">
@@ -29,15 +36,13 @@ const PlayFlashcard = ({
           !flipped ? 'text-2xl font-bold' : 'text-sm text-gray-500'
         )}
       >
-        {flashcard.front}
+        {front}
         {flipped && (
           <div className="absolute left-1/2 top-full h-1/2 w-[1px] translate-x-1/2 bg-gray-500 text-xs"></div>
         )}
       </h2>
 
-      {flipped && (
-        <h2 className="text-center text-2xl font-bold">{flashcard.back}</h2>
-      )}
+      {flipped && <h2 className="text-center text-2xl font-bold">{back}</h2>}
 
       {!flipped && (
         <button
