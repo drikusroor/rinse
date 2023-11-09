@@ -12,7 +12,7 @@ interface AddNewButton {
 type DashboardLayoutProps = {
   children?: React.ReactNode
   title?: string
-  addNewButton: AddNewButton
+  addNewButton?: AddNewButton
 }
 
 const DashboardLayout = ({
