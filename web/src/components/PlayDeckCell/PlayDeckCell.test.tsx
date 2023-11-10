@@ -1,4 +1,5 @@
 import { render } from '@redwoodjs/testing/web'
+
 import { Loading, Empty, Failure, Success } from './PlayDeckCell'
 import { standard } from './PlayDeckCell.mock'
 
@@ -35,7 +36,7 @@ describe('PlayDeckCell', () => {
 
   it('renders Success successfully', async () => {
     expect(() => {
-      render(<Success playDeck={standard().playDeck} />)
+      render(<Success deck={standard().deck} />)
     }).not.toThrow()
   })
 })

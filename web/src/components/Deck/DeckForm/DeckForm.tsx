@@ -10,7 +10,7 @@ import {
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
-import FlashcardFormInputs from 'src/components/DeckFlashcardForm/DeckFlashcardForm'
+import DeckFlashcardForm from 'src/components/DeckFlashcardForm/DeckFlashcardForm'
 import FlashCardFormItem from 'src/components/FlashCardFormItem/FlashCardFormItem'
 
 type FormDeck = NonNullable<EditDeckById['deck']>
@@ -117,7 +117,7 @@ const DeckForm = (props: DeckFormProps) => {
             ))}
           </div>
 
-          <FlashcardFormInputs
+          <DeckFlashcardForm
             onSave={onAddFlashCard}
             error={null}
             loading={false}

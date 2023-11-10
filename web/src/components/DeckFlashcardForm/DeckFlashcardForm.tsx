@@ -1,4 +1,10 @@
-import { Label, TextField, FieldError, ButtonField } from '@redwoodjs/forms'
+import {
+  Label,
+  TextField,
+  FieldError,
+  ButtonField,
+  Form,
+} from '@redwoodjs/forms'
 
 type FlashcardFormProps = {
   flashcard?: Flashcard
@@ -7,7 +13,7 @@ type FlashcardFormProps = {
   loading: boolean
 }
 
-const FlashcardFormInputs = ({
+const DeckFlashcardForm = ({
   flashcard,
   onSave,
   error,
@@ -21,7 +27,7 @@ const FlashcardFormInputs = ({
   )
 
   return (
-    <>
+    <Form onSubmit={onSave}>
       <Label
         name="front"
         className="rw-label"
@@ -60,15 +66,9 @@ const FlashcardFormInputs = ({
 
       <FieldError name="back" className="rw-field-error" />
 
-      <button
-        type="button"
-        className="rw-button rw-button-blue my-3"
-        onClick={() => onSave(state)}
-      >
-        Add flashcard
-      </button>
-    </>
+      <button className="rw-button rw-button-blue my-3">Add flashcard</button>
+    </Form>
   )
 }
 
-export default FlashcardFormInputs
+export default DeckFlashcardForm

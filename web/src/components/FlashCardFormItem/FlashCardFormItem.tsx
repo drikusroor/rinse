@@ -1,5 +1,7 @@
+import type { Flashcard } from 'types/graphql'
+
 type FlashCardFormItemProps = {
-  flashcard?: FlashCard
+  flashcard?: Flashcard
 }
 
 const FlashCardFormItem = ({ flashcard }: FlashCardFormItemProps) => {

@@ -12,14 +12,14 @@
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-import FlashcardFormInputs from './DeckFlashcardForm'
+import DeckFlashcardForm from './DeckFlashcardForm'
 
-const meta: Meta<typeof FlashcardFormInputs> = {
-  component: FlashcardFormInputs,
+const meta: Meta<typeof DeckFlashcardForm> = {
+  component: DeckFlashcardForm,
 }
 
 export default meta
 
-type Story = StoryObj<typeof FlashcardFormInputs>
+type Story = StoryObj<typeof DeckFlashcardForm>
 
 export const Primary: Story = {}
