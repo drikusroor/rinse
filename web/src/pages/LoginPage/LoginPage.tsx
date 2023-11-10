@@ -16,7 +16,7 @@ import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useAuth } from 'src/auth'
 
 const WELCOME_MESSAGE = 'Welcome back!'
-const REDIRECT = routes.home()
+const REDIRECT = routes.playOverview()
 
 const LoginPage = ({ type }) => {
   const {
@@ -28,7 +28,7 @@ const LoginPage = ({ type }) => {
   } = useAuth()
   const [shouldShowWebAuthn, setShouldShowWebAuthn] = useState(false)
   const [showWebAuthn, setShowWebAuthn] = useState(
-    webAuthn.isEnabled() && type !== 'password'
+    webAuthn?.isEnabled() && type !== 'password'
   )
 
   // should redirect right after login or wait to show the webAuthn prompts?

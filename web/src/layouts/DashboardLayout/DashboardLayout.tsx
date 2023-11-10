@@ -122,17 +122,6 @@ const DashboardLayout = ({
                             role="menuitem"
                           >
                             <Link
-                              to={routes.home()}
-                              className="block w-full text-gray-700 hover:text-gray-900"
-                            >
-                              Home
-                            </Link>
-                          </li>
-                          <li
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                            role="menuitem"
-                          >
-                            <Link
                               to={routes.login()}
                               className="block w-full text-gray-700 hover:text-gray-900"
                             >
