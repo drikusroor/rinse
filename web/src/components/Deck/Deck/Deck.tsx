@@ -88,9 +88,6 @@ const Deck = ({ deck }: Props) => {
           Delete
         </button>
       </nav>
-      <div className="mt-8">
-        <PlayFlashcards flashcards={deck.flashcards} />
-      </div>
     </>
   )
 }
