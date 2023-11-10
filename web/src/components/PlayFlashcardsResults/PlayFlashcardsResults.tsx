@@ -1,3 +1,11 @@
+import {
+  FaBackspace,
+  FaBackward,
+  FaGamepad,
+  FaHome,
+  FaStepBackward,
+} from 'react-icons/fa'
+
 import { Link, routes, useLocation } from '@redwoodjs/router'
 
 type PlayFlashcardsResultsProps = {
@@ -20,7 +28,7 @@ const PlayFlashcardsResults = ({
   }
 
   return (
-    <div className="mx-auto w-1/2 rounded-lg bg-gradient-to-br from-sand to-salmon-light p-5 text-center text-forest shadow-lg">
+    <div className="mx-auto flex min-h-[16rem] max-w-lg flex-col justify-center rounded-lg bg-gradient-to-br from-sand to-salmon-light p-5 text-center text-forest shadow-lg">
       <h1 className="text-4xl font-bold">Results</h1>
       <p className="mt-3">
         You got {correctCount} out of {answerCount} correct.
@@ -37,15 +45,17 @@ const PlayFlashcardsResults = ({
       <div className="mx-auto mt-5 flex flex-row items-center justify-center gap-5">
         <Link
           to={routes.playOverview()}
-          className="rounded-lg bg-blue-600 p-2 text-center text-white shadow-lg transition-colors hover:bg-blue-700"
+          className="flex flex-row items-center gap-2 rounded-lg bg-blue-600 p-2 px-3 text-center text-white drop-shadow transition-colors hover:bg-blue-700"
         >
+          <FaHome />
           Go back
         </Link>
         <Link
           to={pathname}
           onClick={playAgain}
-          className="rounded-lg bg-green-600 p-2 text-center text-white shadow-lg transition-colors hover:bg-green-700"
+          className="flex flex-row items-center gap-2 rounded-lg bg-green-600 p-2 px-3 text-center text-white drop-shadow transition-colors hover:bg-green-700"
         >
+          <FaGamepad />
           Play Again
         </Link>
       </div>

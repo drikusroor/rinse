@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { FaRecycle } from 'react-icons/fa'
+import { FaRecycle, FaThumbsDown, FaThumbsUp } from 'react-icons/fa'
 import { Flashcard } from 'types/graphql'
 
 import classNames from 'src/lib/class-names'
@@ -29,7 +29,7 @@ const PlayFlashcard = ({
   const back = inverse ? flashcard.front : flashcard.back
 
   return (
-    <div className="mx-auto max-w-lg rounded-lg bg-gradient-to-br from-sand to-salmon-light p-5 drop-shadow-lg">
+    <div className="mx-auto flex min-h-[16rem] max-w-lg flex-col justify-center rounded-lg bg-gradient-to-br from-sand to-salmon-light p-5 drop-shadow-lg">
       <h2
         className={classNames(
           'relative text-center',
@@ -58,15 +58,17 @@ const PlayFlashcard = ({
       {flipped && (
         <div className="mt-4 flex justify-center gap-2">
           <button
-            className="rounded bg-green-600 px-4 py-2 font-bold text-white transition-colors hover:bg-green-700"
+            className="flex flex-row items-center gap-2 rounded bg-green-600 px-4 py-2 font-bold text-white drop-shadow transition-colors hover:bg-green-700"
             onClick={onCorrect}
           >
+            <FaThumbsUp />
             Correct
           </button>
           <button
-            className="rounded bg-red-600 px-4 py-2 font-bold text-white transition-colors hover:bg-red-700"
+            className="flex flex-row items-center gap-2 rounded bg-red-600 px-4 py-2 font-bold text-white drop-shadow transition-colors hover:bg-red-700"
             onClick={onIncorrect}
           >
+            <FaThumbsDown />
             Incorrect
           </button>
         </div>
