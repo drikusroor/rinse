@@ -1,10 +1,4 @@
-import {
-  FaBackspace,
-  FaBackward,
-  FaGamepad,
-  FaHome,
-  FaStepBackward,
-} from 'react-icons/fa'
+import { FaGamepad, FaHome } from 'react-icons/fa'
 
 import { Link, routes, useLocation } from '@redwoodjs/router'
 
@@ -12,12 +6,14 @@ type PlayFlashcardsResultsProps = {
   correctCount: number
   answerCount: number
   timeElapsed: number
+  streak: number
 }
 
 const PlayFlashcardsResults = ({
   correctCount,
   answerCount,
   timeElapsed,
+  streak,
 }: PlayFlashcardsResultsProps) => {
   const readableTimeElapsed = timeElapsed / 1000
 
@@ -36,6 +32,7 @@ const PlayFlashcardsResults = ({
       <p className="mt-1">
         That&apos;s {Math.round((correctCount / answerCount) * 100)}% correct!
       </p>
+      <p className="mt-1">You got {streak} in a row correct. Keep it up!</p>
       <p className="mt-1">You took {readableTimeElapsed} seconds.</p>
       <p className="mt-1">
         That&apos;s an average of{' '}

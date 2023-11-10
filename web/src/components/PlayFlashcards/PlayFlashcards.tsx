@@ -41,11 +41,17 @@ const PlayFlashcards = (props: PlayFlashcardsProps) => {
   )
   const [answerCount, setAnswerCount] = React.useState(0)
   const [correctCount, setCorrectCount] = React.useState(0)
-  const [startTime, setStartTime] = React.useState(Date.now())
+  const [streak, setStreak] = React.useState(0)
+  const [maxStreak, setMaxStreak] = React.useState(0)
+  const [startTime] = React.useState(Date.now())
   const [endTime, setEndTime] = React.useState(Date.now())
   const [timeElapsed, setTimeElapsed] = React.useState(0)
 
   const nextQuestion = () => {
+    if (streak > maxStreak) {
+      setMaxStreak(streak)
+    }
+
     if (answerCount + 1 === amountOfFlashcardsToPlay) {
       setEndTime(Date.now())
       setTimeElapsed(endTime - startTime)
@@ -57,6 +63,7 @@ const PlayFlashcards = (props: PlayFlashcardsProps) => {
   const onCorrect = async () => {
     setAnswerCount(answerCount + 1)
     setCorrectCount(correctCount + 1)
+    setStreak(streak + 1)
 
     if (answerMode === 'text') {
       await wait(playConfiguration.timeUntilNextFlashcard)
@@ -66,6 +73,7 @@ const PlayFlashcards = (props: PlayFlashcardsProps) => {
 
   const onIncorrect = async () => {
     setAnswerCount(answerCount + 1)
+    setStreak(0)
 
     if (answerMode === 'text') {
       await wait(playConfiguration.timeUntilNextFlashcard)
@@ -85,6 +93,7 @@ const PlayFlashcards = (props: PlayFlashcardsProps) => {
       correctCount={correctCount}
       answerCount={answerCount}
       timeElapsed={timeElapsed}
+      streak={maxStreak}
     />
   )
 }
