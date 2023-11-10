@@ -43,7 +43,7 @@ const DashboardLayout = ({
                     to={routes.playOverview()}
                     className="group inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-semibold text-sand transition-colors hover:text-salmon-light"
                   >
-                    <span className="rounded bg-forest p-3 transition group-hover:drop-shadow-xl">
+                    <span className="rounded bg-forest p-3 drop-shadow-lg transition">
                       Play!
                     </span>
                   </Link>
