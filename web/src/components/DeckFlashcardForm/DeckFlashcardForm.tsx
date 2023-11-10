@@ -26,8 +26,18 @@ const DeckFlashcardForm = ({
     }
   )
 
+  const onSubmit = (data) => {
+    // clear form
+    setState({
+      front: '',
+      back: '',
+    })
+
+    onSave(data)
+  }
+
   return (
-    <Form onSubmit={onSave}>
+    <Form onSubmit={onSubmit}>
       <Label
         name="front"
         className="rw-label"
@@ -42,6 +52,7 @@ const DeckFlashcardForm = ({
         className="rw-input"
         errorClassName="rw-input rw-input-error"
         validation={{ required: true }}
+        value={state.front}
         onChange={(e) => setState({ ...state, front: e.target.value })}
       />
 
@@ -61,6 +72,7 @@ const DeckFlashcardForm = ({
         className="rw-input"
         errorClassName="rw-input rw-input-error"
         validation={{ required: true }}
+        value={state.back}
         onChange={(e) => setState({ ...state, back: e.target.value })}
       />
 

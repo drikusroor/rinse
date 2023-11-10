@@ -58,7 +58,28 @@ const DeckForm = (props: DeckFormProps) => {
   }
 
   return (
-    <div className="rw-form-wrapper">
+    <div className="rw-form-wrapper grid gap-5 md:grid-cols-2">
+      <div>
+        <div className="mt-5 rounded-lg border bg-gray-200 p-5">
+          <h3 className="mt-5 text-xl font-bold">Flashcards</h3>
+
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {flashcards.map((flashcard, index) => (
+              <FlashCardFormItem
+                key={index}
+                flashcard={flashcard}
+                setFlashcards={setFlashcards}
+              />
+            ))}
+          </div>
+        </div>
+        <DeckFlashcardForm
+          onSave={onAddFlashCard}
+          error={null}
+          loading={false}
+        />
+      </div>
+
       <Form<FormDeck> onSubmit={onSubmit} error={props.error}>
         <FormError
           error={props.error}
@@ -103,26 +124,6 @@ const DeckForm = (props: DeckFormProps) => {
         />
 
         <FieldError name="description" className="rw-field-error" />
-
-        <div className="mt-5 rounded-lg border bg-gray-200 p-5">
-          <h3 className="mt-5 text-xl font-bold">Flashcards</h3>
-
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {flashcards.map((flashcard, index) => (
-              <FlashCardFormItem
-                key={index}
-                flashcard={flashcard}
-                setFlashcards={setFlashcards}
-              />
-            ))}
-          </div>
-
-          <DeckFlashcardForm
-            onSave={onAddFlashCard}
-            error={null}
-            loading={false}
-          />
-        </div>
 
         <div className="mt-5">
           <Submit
