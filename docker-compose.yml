@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+
+  rinse_db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    ports:
+      - 6666:5432
+
+  rinse_db_test:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    volumes:
+      - ./data_test:/var/lib/postgresql/data
+    ports:
+      - 6667:5432
+
+volumes:
+  postgres_data:
+    driver: local
