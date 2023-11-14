@@ -6,7 +6,6 @@ export const schema = gql`
     salt: String!
     resetToken: String
     resetTokenExpiresAt: DateTime
-    webAuthnChallenge: String
     # credentials: [UserCredential]!
     Deck: [Deck]!
   }
@@ -22,7 +21,6 @@ export const schema = gql`
     salt: String!
     resetToken: String
     resetTokenExpiresAt: DateTime
-    webAuthnChallenge: String
   }
 
   input UpdateUserInput {
@@ -31,7 +29,6 @@ export const schema = gql`
     salt: String
     resetToken: String
     resetTokenExpiresAt: DateTime
-    webAuthnChallenge: String
   }
 
   type Mutation {

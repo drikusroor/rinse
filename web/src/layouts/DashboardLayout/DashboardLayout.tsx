@@ -20,7 +20,7 @@ const DashboardLayout = ({
   addNewButton,
   title,
 }: DashboardLayoutProps) => {
-  const { currentUser } = useAuth()
+  const { currentUser, logOut } = useAuth()
 
   return (
     <div className="relative min-h-screen">
@@ -78,7 +78,7 @@ const DashboardLayout = ({
                     {!currentUser ? (
                       <FaUserCircle className="h-8 w-8 text-gray-500" />
                     ) : (
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-500 text-white">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-forest to-salmon text-white">
                         {currentUser?.email?.charAt(0).toUpperCase()}
                       </div>
                     )}
@@ -121,12 +121,12 @@ const DashboardLayout = ({
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             role="menuitem"
                           >
-                            <Link
-                              to={routes.login()}
-                              className="block w-full text-gray-700 hover:text-gray-900"
+                            <button
+                              onClick={logOut}
+                              className="block w-full text-left text-gray-700 hover:text-gray-900"
                             >
                               Sign out
-                            </Link>
+                            </button>
                           </li>
                         </>
                       )}

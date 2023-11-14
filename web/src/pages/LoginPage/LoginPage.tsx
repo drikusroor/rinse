@@ -18,128 +18,40 @@ import { useAuth } from 'src/auth'
 const WELCOME_MESSAGE = 'Welcome back!'
 const REDIRECT = routes.playOverview()
 
-const LoginPage = ({ type }) => {
-  const {
-    isAuthenticated,
-    client: webAuthn,
-    loading,
-    logIn,
-    reauthenticate,
-  } = useAuth()
-  const [shouldShowWebAuthn, setShouldShowWebAuthn] = useState(false)
-  const [showWebAuthn, setShowWebAuthn] = useState(
-    webAuthn?.isEnabled() && type !== 'password'
-  )
+const LoginPage = () => {
+  const { isAuthenticated, logIn } = useAuth()
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
 
-  // should redirect right after login or wait to show the webAuthn prompts?
   useEffect(() => {
-    if (isAuthenticated && (!shouldShowWebAuthn || webAuthn?.isEnabled())) {
-      navigate(REDIRECT)
+    if (isAuthenticated) {
+      navigate(routes.home())
     }
-  }, [isAuthenticated, shouldShowWebAuthn])
+  }, [isAuthenticated])
 
-  // if WebAuthn is enabled, show the prompt as soon as the page loads
+  const emailRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
-    if (!loading && !isAuthenticated && showWebAuthn) {
-      onAuthenticate()
-    }
-  }, [loading, isAuthenticated])
-
-  // focus on the email field as soon as the page loads
-  const emailRef = useRef()
-  useEffect(() => {
-    emailRef.current && emailRef.current.focus()
+    emailRef.current?.focus()
   }, [])
 
-  const onSubmit = async (data) => {
-    const webAuthnSupported = await webAuthn?.isSupported()
-
-    if (webAuthnSupported) {
-      setShouldShowWebAuthn(true)
-    }
+  const onSubmit = async (data: Record<string, string>) => {
+    setIsLoggingIn(true)
     const response = await logIn({
       username: data.email,
       password: data.password,
     })
 
     if (response.message) {
-      // auth details good, but user not logged in
       toast(response.message)
     } else if (response.error) {
-      // error while authenticating
       toast.error(response.error)
     } else {
-      // user logged in
-      if (webAuthnSupported) {
-        setShowWebAuthn(true)
-      } else {
-        toast.success(WELCOME_MESSAGE)
-      }
-    }
-  }
-
-  const onAuthenticate = async () => {
-    try {
-      await webAuthn.authenticate()
-      await reauthenticate()
       toast.success(WELCOME_MESSAGE)
+
       navigate(REDIRECT)
-    } catch (e) {
-      if (e.name === 'WebAuthnDeviceNotFoundError') {
-        toast.error('Device not found, log in with Email/Password to continue')
-        setShowWebAuthn(false)
-      } else {
-        toast.error(e.message)
-      }
     }
-  }
 
-  const onRegister = async () => {
-    try {
-      await webAuthn.register()
-      toast.success(WELCOME_MESSAGE)
-      navigate(REDIRECT)
-    } catch (e) {
-      toast.error(e.message)
-    }
+    setIsLoggingIn(false)
   }
-
-  const onSkip = () => {
-    toast.success(WELCOME_MESSAGE)
-    setShouldShowWebAuthn(false)
-  }
-
-  const AuthWebAuthnPrompt = () => {
-    return (
-      <div className="rw-webauthn-wrapper">
-        <h2>WebAuthn Login Enabled</h2>
-        <p>Log in with your fingerprint, face or PIN</p>
-        <div className="rw-button-group">
-          <button className="rw-button rw-button-blue" onClick={onAuthenticate}>
-            Open Authenticator
-          </button>
-        </div>
-      </div>
-    )
-  }
-
-  const RegisterWebAuthnPrompt = () => (
-    <div className="rw-webauthn-wrapper">
-      <h2>No more Passwords!</h2>
-      <p>
-        Depending on your device you can log in with your fingerprint, face or
-        PIN next time.
-      </p>
-      <div className="rw-button-group">
-        <button className="rw-button rw-button-blue" onClick={onRegister}>
-          Turn On
-        </button>
-        <button className="rw-button" onClick={onSkip}>
-          Skip for now
-        </button>
-      </div>
-    </div>
-  )
 
   const PasswordForm = () => (
     <Form onSubmit={onSubmit} className="rw-form-wrapper">
@@ -195,49 +107,31 @@ const LoginPage = ({ type }) => {
       <FieldError name="password" className="rw-field-error" />
 
       <div className="rw-button-group">
-        <Submit className="rw-button rw-button-blue">Login</Submit>
+        <Submit
+          className={`rw-button rw-button-blue ${
+            isLoggingIn ? 'animate-bounce cursor-wait opacity-50' : ''
+          }}`}
+          disabled={isLoggingIn}
+        >
+          Login
+        </Submit>
       </div>
     </Form>
   )
 
   const formToRender = () => {
-    if (showWebAuthn) {
-      if (webAuthn?.isEnabled()) {
-        return <AuthWebAuthnPrompt />
-      } else {
-        return <RegisterWebAuthnPrompt />
-      }
-    } else {
-      return <PasswordForm />
-    }
+    return <PasswordForm />
   }
 
   const linkToRender = () => {
-    if (showWebAuthn) {
-      if (webAuthn?.isEnabled()) {
-        return (
-          <div className="rw-login-link">
-            <span>or login with </span>{' '}
-            <a href="?type=password" className="rw-link">
-              email and password
-            </a>
-          </div>
-        )
-      }
-    } else {
-      return (
-        <div className="rw-login-link">
-          <span>Don&apos;t have an account?</span>{' '}
-          <Link to={routes.signup()} className="rw-link">
-            Sign up!
-          </Link>
-        </div>
-      )
-    }
-  }
-
-  if (loading) {
-    return null
+    return (
+      <div className="rw-login-link">
+        <span>Don&apos;t have an account?</span>{' '}
+        <Link to={routes.signup()} className="rw-link">
+          Sign up!
+        </Link>
+      </div>
+    )
   }
 
   return (
