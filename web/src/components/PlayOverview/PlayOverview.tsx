@@ -23,7 +23,7 @@ const PlayOverview = ({ decks, studySets }: PlayOverviewProps) => {
   return (
     <div>
       <section>
-        <h2 className="text-2xl font-bold">Decks</h2>
+        <h2 className="text-2xl font-bold text-sand">Decks</h2>
         <ul className="mt-3 flex flex-wrap gap-4">
           {decks.map((deck) => (
             <li key={deck.id} className="group relative">
@@ -42,7 +42,31 @@ const PlayOverview = ({ decks, studySets }: PlayOverviewProps) => {
                 </p>
               </Link>
 
-              <div className="absolute bottom-0 right-0 flex flex-row items-center gap-1 p-1 opacity-0 transition-opacity group-hover:opacity-100">
+              <div className="absolute bottom-0 right-0 grid grid-cols-2 gap-1 p-1 opacity-0 transition-opacity group-hover:opacity-100">
+                <Link
+                  title="Play in manual flashcard mode (inverse)"
+                  to={routes.playDeck({
+                    id: deck.id,
+                    answerMode: 'manual',
+                    inverse: true,
+                  })}
+                  className="rounded bg-gradient-to-br from-sand to-aqua p-2 text-forest drop-shadow-lg transition hover:-translate-y-1"
+                >
+                  <FaRecycle />
+                </Link>
+
+                <Link
+                  title="Play in text question mode (inverse)"
+                  to={routes.playDeck({
+                    id: deck.id,
+                    answerMode: 'text',
+                    inverse: true,
+                  })}
+                  className="rounded bg-gradient-to-br from-sand to-aqua p-2 text-forest drop-shadow-lg transition hover:-translate-y-1"
+                >
+                  <FaTerminal />
+                </Link>
+
                 <Link
                   title="Play in manual flashcard mode"
                   to={routes.playDeck({ id: deck.id, answerMode: 'manual' })}
@@ -64,7 +88,7 @@ const PlayOverview = ({ decks, studySets }: PlayOverviewProps) => {
         </ul>
       </section>
       <section className="mt-8">
-        <h2 className="text-2xl font-bold">Study Sets</h2>
+        <h2 className="text-2xl font-bold text-sand">Study Sets</h2>
         <ul className="mt-3 flex flex-wrap gap-4">
           {studySets.map((studySet) => (
             <li key={studySet.id}>
