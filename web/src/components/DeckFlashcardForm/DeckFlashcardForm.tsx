@@ -1,10 +1,7 @@
-import {
-  Label,
-  TextField,
-  FieldError,
-  ButtonField,
-  Form,
-} from '@redwoodjs/forms'
+import { FaPlusSquare } from 'react-icons/fa'
+import { Flashcard } from 'types/graphql'
+
+import { Label, TextField, FieldError, Form } from '@redwoodjs/forms'
 
 type FlashcardFormProps = {
   flashcard?: Flashcard
@@ -19,7 +16,7 @@ const DeckFlashcardForm = ({
   error,
   loading,
 }: FlashcardFormProps) => {
-  const [state, setState] = React.useState<FlashcardFormProps>(
+  const [state, setState] = React.useState<Pick<Flashcard, 'front' | 'back'>>(
     flashcard || {
       front: '',
       back: '',
@@ -37,10 +34,13 @@ const DeckFlashcardForm = ({
   }
 
   return (
-    <Form onSubmit={onSubmit}>
+    <Form
+      onSubmit={onSubmit}
+      className="w-48 rounded-lg border bg-amber-500 p-3"
+    >
       <Label
         name="front"
-        className="rw-label"
+        className="rw-label sr-only"
         errorClassName="rw-label rw-label-error"
       >
         Front
@@ -48,8 +48,9 @@ const DeckFlashcardForm = ({
 
       <TextField
         name="front"
+        placeholder="Front"
         defaultValue={flashcard?.front}
-        className="rw-input"
+        className="rw-input m-0 rounded-lg border bg-amber-50 p-3"
         errorClassName="rw-input rw-input-error"
         validation={{ required: true }}
         value={state.front}
@@ -60,7 +61,7 @@ const DeckFlashcardForm = ({
 
       <Label
         name="back"
-        className="rw-label"
+        className="rw-label sr-only"
         errorClassName="rw-label rw-label-error"
       >
         Back
@@ -68,8 +69,9 @@ const DeckFlashcardForm = ({
 
       <TextField
         name="back"
+        placeholder="Back"
         defaultValue={flashcard?.back}
-        className="rw-input"
+        className="rw-input m-0 mt-3 rounded-lg border bg-amber-50 p-3"
         errorClassName="rw-input rw-input-error"
         validation={{ required: true }}
         value={state.back}
@@ -78,7 +80,10 @@ const DeckFlashcardForm = ({
 
       <FieldError name="back" className="rw-field-error" />
 
-      <button className="rw-button rw-button-blue my-3">Add flashcard</button>
+      <button className="rw-button rw-button-blue mt-3 inline-flex w-full items-center gap-2 rounded-lg p-3 text-base">
+        <FaPlusSquare />
+        Add
+      </button>
     </Form>
   )
 }

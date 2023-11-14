@@ -12,6 +12,7 @@ import type { RWGqlError } from '@redwoodjs/forms'
 
 import DeckFlashcardForm from 'src/components/DeckFlashcardForm/DeckFlashcardForm'
 import FlashCardFormItem from 'src/components/FlashCardFormItem/FlashCardFormItem'
+import useKeyboardShortcut from 'src/hooks/useKeyboardShortcut'
 
 type FormDeck = NonNullable<EditDeckById['deck']>
 
@@ -26,6 +27,8 @@ const DeckForm = (props: DeckFormProps) => {
   const [flashcards, setFlashcards] = React.useState<FormDeck['flashcards']>(
     props.deck?.flashcards || []
   )
+
+  const formRef = React.useRef<HTMLFormElement>(null)
 
   const onAddFlashCard = (data) => {
     const flashcard = {
@@ -57,30 +60,36 @@ const DeckForm = (props: DeckFormProps) => {
     props.onSave(inputData, props?.deck?.id)
   }
 
+  useKeyboardShortcut(['Ctrl', 's'], () => {
+    if (formRef.current) {
+      formRef.current.dispatchEvent(
+        new Event('submit', { cancelable: true, bubbles: true })
+      )
+    }
+  })
+
   return (
     <div className="rw-form-wrapper grid gap-5 md:grid-cols-2">
       <div>
         <div className="mt-5 rounded-lg border bg-gray-200 p-5">
-          <h3 className="mt-5 text-xl font-bold">Flashcards</h3>
+          <h3 className="text-xl font-bold">Flashcards</h3>
 
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          <div className="mt-3 flex flex-row flex-wrap gap-4">
             {flashcards.map((flashcard, index) => (
-              <FlashCardFormItem
-                key={index}
-                flashcard={flashcard}
-                setFlashcards={setFlashcards}
-              />
+              <FlashCardFormItem key={index} flashcard={flashcard} />
             ))}
+            <div className="basis-full">
+              <DeckFlashcardForm
+                onSave={onAddFlashCard}
+                error={null}
+                loading={false}
+              />
+            </div>
           </div>
         </div>
-        <DeckFlashcardForm
-          onSave={onAddFlashCard}
-          error={null}
-          loading={false}
-        />
       </div>
 
-      <Form<FormDeck> onSubmit={onSubmit} error={props.error}>
+      <Form<FormDeck> onSubmit={onSubmit} ref={formRef} error={props.error}>
         <FormError
           error={props.error}
           wrapperClassName="rw-form-error-wrapper"
