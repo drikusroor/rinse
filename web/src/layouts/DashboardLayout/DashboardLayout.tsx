@@ -1,6 +1,6 @@
 import { FaPlusCircle, FaUserCircle } from 'react-icons/fa'
 
-import { Link, navigate, routes } from '@redwoodjs/router'
+import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 
@@ -78,7 +78,7 @@ const DashboardLayout = ({
                     {!currentUser ? (
                       <FaUserCircle className="h-8 w-8 text-gray-500" />
                     ) : (
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-500 text-white">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-forest to-salmon text-white">
                         {currentUser?.email?.charAt(0).toUpperCase()}
                       </div>
                     )}
@@ -123,7 +123,7 @@ const DashboardLayout = ({
                           >
                             <button
                               onClick={logOut}
-                              className="block w-full text-gray-700 hover:text-gray-900"
+                              className="block w-full text-left text-gray-700 hover:text-gray-900"
                             >
                               Sign out
                             </button>
