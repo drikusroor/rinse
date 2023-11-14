@@ -45,7 +45,9 @@ const LoginPage = () => {
     } else if (response.error) {
       toast.error(response.error)
     } else {
-      toast.success('Welkom terug!')
+      toast.success(WELCOME_MESSAGE)
+
+      navigate(REDIRECT)
     }
 
     setIsLoggingIn(false)
