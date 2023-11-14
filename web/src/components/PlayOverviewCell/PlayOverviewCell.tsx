@@ -1,8 +1,10 @@
+import { FaPlus } from 'react-icons/fa'
 import type {
   FindPlayOverviewQuery,
   FindPlayOverviewQueryVariables,
 } from 'types/graphql'
 
+import { Link, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import PlayOverview from '../PlayOverview/PlayOverview'
@@ -41,7 +43,21 @@ export const QUERY = gql`
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => (
+  <p className="text-sand">
+    You haven't created any decks or study sets yet. Get started by clicking
+    creating a
+    <Link
+      to={routes.newDeck()}
+      className="group ml-3 inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-semibold text-sand transition-colors hover:text-salmon-light"
+    >
+      <span className="inline-flex items-center gap-2 rounded bg-forest p-3 drop-shadow-lg transition">
+        <FaPlus />
+        New Deck
+      </span>
+    </Link>
+  </p>
+)
 
 export const Failure = ({
   error,
