@@ -1,3 +1,5 @@
+import { FaRecycle, FaTerminal } from 'react-icons/fa'
+
 import { Link, routes } from '@redwoodjs/router'
 
 import { truncate } from 'src/lib/formatters'
@@ -24,9 +26,9 @@ const PlayOverview = ({ decks, studySets }: PlayOverviewProps) => {
         <h2 className="text-2xl font-bold">Decks</h2>
         <ul className="mt-3 flex flex-wrap gap-4">
           {decks.map((deck) => (
-            <li key={deck.id}>
+            <li key={deck.id} className="group relative">
               <Link
-                to={routes.playDeck({ id: deck.id })}
+                to={routes.playDeck({ id: deck.id, answerMode: 'text' })}
                 className="block rounded-lg bg-gradient-to-br from-sand to-salmon-light p-5 drop-shadow-lg"
               >
                 <h3 className="text-2xl font-bold">
@@ -39,6 +41,24 @@ const PlayOverview = ({ decks, studySets }: PlayOverviewProps) => {
                   {truncate(deck.description)}
                 </p>
               </Link>
+
+              <div className="absolute bottom-0 right-0 flex flex-row items-center gap-1 p-1 opacity-0 transition-opacity group-hover:opacity-100">
+                <Link
+                  title="Play in manual flashcard mode"
+                  to={routes.playDeck({ id: deck.id, answerMode: 'manual' })}
+                  className="rounded bg-gradient-to-br from-forest to-aqua p-2 text-sand drop-shadow-lg transition hover:-translate-y-1"
+                >
+                  <FaRecycle />
+                </Link>
+
+                <Link
+                  title="Play in text question mode"
+                  to={routes.playDeck({ id: deck.id, answerMode: 'text' })}
+                  className="rounded bg-gradient-to-br from-forest to-aqua p-2 text-sand drop-shadow-lg transition hover:-translate-y-1"
+                >
+                  <FaTerminal />
+                </Link>
+              </div>
             </li>
           ))}
         </ul>

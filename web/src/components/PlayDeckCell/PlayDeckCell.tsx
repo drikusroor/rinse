@@ -3,6 +3,11 @@ import type {
   FindPlayDeckQueryVariables,
 } from 'types/graphql'
 
+type PlayDeckCellProps = {
+  id: number
+  playConfiguration?: PlayConfiguration
+}
+
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import PlayFlashcards from '../PlayFlashcards/PlayFlashcards'
@@ -34,6 +39,13 @@ export const Failure = ({
 
 export const Success = ({
   deck,
-}: CellSuccessProps<FindPlayDeckQuery, FindPlayDeckQueryVariables>) => {
-  return <PlayFlashcards flashcards={deck.flashcards} />
+  playConfiguration,
+}: CellSuccessProps<FindPlayDeckQuery, FindPlayDeckQueryVariables> &
+  PlayDeckCellProps) => {
+  return (
+    <PlayFlashcards
+      flashcards={deck.flashcards}
+      playConfiguration={playConfiguration}
+    />
+  )
 }

@@ -4,8 +4,9 @@ import wait from 'src/lib/wait'
 
 import PlayFlashcard from '../PlayFlashcard/PlayFlashcard'
 import PlayFlashcardsResults from '../PlayFlashcardsResults/PlayFlashcardsResults'
+import PlayTextQuestion from '../PlayTextQuestion/PlayTextQuestion'
 
-interface PlayConfiguration {
+export interface PlayConfiguration {
   timeUntilNextFlashcard: number
   amountOfFlashcardsToPlay?: number
   firstFlashcardIndex?: boolean
@@ -13,9 +14,9 @@ interface PlayConfiguration {
   inverse?: boolean
 }
 
-const DEFAULT_PLAY_CONFIGURATION: PlayConfiguration = {
+export const DEFAULT_PLAY_CONFIGURATION: PlayConfiguration = {
   timeUntilNextFlashcard: 2000,
-  answerMode: 'manual',
+  answerMode: 'text',
   inverse: false,
 }
 
@@ -81,19 +82,34 @@ const PlayFlashcards = (props: PlayFlashcardsProps) => {
     nextQuestion()
   }
 
-  return answerCount < amountOfFlashcardsToPlay ? (
-    <PlayFlashcard
+  if (answerCount === amountOfFlashcardsToPlay) {
+    return (
+      <PlayFlashcardsResults
+        correctCount={correctCount}
+        answerCount={answerCount}
+        timeElapsed={timeElapsed}
+        streak={maxStreak}
+      />
+    )
+  }
+
+  if (answerMode === 'manual') {
+    return (
+      <PlayFlashcard
+        inverse={inverse}
+        flashcard={flashcards[currentFlashcardIndex]}
+        onCorrect={onCorrect}
+        onIncorrect={onIncorrect}
+      />
+    )
+  }
+
+  return (
+    <PlayTextQuestion
       inverse={inverse}
       flashcard={flashcards[currentFlashcardIndex]}
       onCorrect={onCorrect}
       onIncorrect={onIncorrect}
-    />
-  ) : (
-    <PlayFlashcardsResults
-      correctCount={correctCount}
-      answerCount={answerCount}
-      timeElapsed={timeElapsed}
-      streak={maxStreak}
     />
   )
 }
