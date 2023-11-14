@@ -14,6 +14,7 @@ import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
+import classNames from 'src/lib/class-names'
 
 const WELCOME_MESSAGE = 'Welcome back!'
 const REDIRECT = routes.playOverview()
@@ -64,7 +65,8 @@ const LoginPage = () => {
       </Label>
       <TextField
         name="email"
-        className="rw-input"
+        className={classNames('rw-input', isLoggingIn ? 'bg-gray-100' : '')}
+        disabled={isLoggingIn}
         errorClassName="rw-input rw-input-error"
         ref={emailRef}
         autoFocus
@@ -87,7 +89,8 @@ const LoginPage = () => {
       </Label>
       <PasswordField
         name="password"
-        className="rw-input"
+        className={classNames('rw-input', isLoggingIn ? 'bg-gray-100' : '')}
+        disabled={isLoggingIn}
         errorClassName="rw-input rw-input-error"
         autoComplete="current-password"
         validation={{
@@ -108,7 +111,7 @@ const LoginPage = () => {
 
       <div className="rw-button-group">
         <Submit
-          className={`rw-button rw-button-blue ${
+          className={`rw-button rw-button-blue transition-opacity ${
             isLoggingIn ? 'animate-bounce cursor-wait opacity-50' : ''
           }}`}
           disabled={isLoggingIn}
