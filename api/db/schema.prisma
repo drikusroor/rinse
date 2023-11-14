@@ -15,7 +15,6 @@ model User {
   salt                String
   resetToken          String?
   resetTokenExpiresAt DateTime?
-  webAuthnChallenge   String?          @unique
   credentials         UserCredential[]
   Deck                Deck[]
 }
@@ -40,23 +39,23 @@ model Flashcard {
 }
 
 model Deck {
-  id           Int            @id @default(autoincrement())
-  userId       Int
-  user         User           @relation(fields: [userId], references: [id])
-  name         String
-  description  String?
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  id            Int            @id @default(autoincrement())
+  userId        Int
+  user          User           @relation(fields: [userId], references: [id])
+  name          String
+  description   String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   flashcards    Flashcard[]
   studySetDecks StudySetDeck[]
 }
 
 model StudySet {
-  id           Int            @id @default(autoincrement())
-  deckId       Int
-  name         String
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  id            Int            @id @default(autoincrement())
+  deckId        Int
+  name          String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   studySetDecks StudySetDeck[]
 }
 
