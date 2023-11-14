@@ -63,21 +63,17 @@ const DeckForm = (props: DeckFormProps) => {
         <div className="mt-5 rounded-lg border bg-gray-200 p-5">
           <h3 className="mt-5 text-xl font-bold">Flashcards</h3>
 
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          <div className="flex flex-row flex-wrap gap-4">
             {flashcards.map((flashcard, index) => (
-              <FlashCardFormItem
-                key={index}
-                flashcard={flashcard}
-                setFlashcards={setFlashcards}
-              />
+              <FlashCardFormItem key={index} flashcard={flashcard} />
             ))}
+            <DeckFlashcardForm
+              onSave={onAddFlashCard}
+              error={null}
+              loading={false}
+            />
           </div>
         </div>
-        <DeckFlashcardForm
-          onSave={onAddFlashCard}
-          error={null}
-          loading={false}
-        />
       </div>
 
       <Form<FormDeck> onSubmit={onSubmit} error={props.error}>
