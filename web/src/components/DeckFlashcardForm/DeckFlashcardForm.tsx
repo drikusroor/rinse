@@ -1,12 +1,7 @@
 import { FaPlusSquare } from 'react-icons/fa'
+import { Flashcard } from 'types/graphql'
 
-import {
-  Label,
-  TextField,
-  FieldError,
-  ButtonField,
-  Form,
-} from '@redwoodjs/forms'
+import { Label, TextField, FieldError, Form } from '@redwoodjs/forms'
 
 type FlashcardFormProps = {
   flashcard?: Flashcard
@@ -21,7 +16,7 @@ const DeckFlashcardForm = ({
   error,
   loading,
 }: FlashcardFormProps) => {
-  const [state, setState] = React.useState<FlashcardFormProps>(
+  const [state, setState] = React.useState<Pick<Flashcard, 'front' | 'back'>>(
     flashcard || {
       front: '',
       back: '',
@@ -41,7 +36,7 @@ const DeckFlashcardForm = ({
   return (
     <Form
       onSubmit={onSubmit}
-      className="mt-3 rounded-lg border bg-amber-500 p-3"
+      className="w-48 rounded-lg border bg-amber-500 p-3"
     >
       <Label
         name="front"
