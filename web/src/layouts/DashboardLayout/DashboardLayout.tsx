@@ -1,6 +1,6 @@
 import { FaPlusCircle, FaUserCircle } from 'react-icons/fa'
 
-import { Link, routes } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 
@@ -20,7 +20,7 @@ const DashboardLayout = ({
   addNewButton,
   title,
 }: DashboardLayoutProps) => {
-  const { currentUser } = useAuth()
+  const { currentUser, logOut } = useAuth()
 
   return (
     <div className="relative min-h-screen">
@@ -121,12 +121,12 @@ const DashboardLayout = ({
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             role="menuitem"
                           >
-                            <Link
-                              to={routes.login()}
+                            <button
+                              onClick={logOut}
                               className="block w-full text-gray-700 hover:text-gray-900"
                             >
                               Sign out
-                            </Link>
+                            </button>
                           </li>
                         </>
                       )}
