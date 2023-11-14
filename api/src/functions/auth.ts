@@ -154,7 +154,6 @@ export const handler = async (
       salt: 'salt',
       resetToken: 'resetToken',
       resetTokenExpiresAt: 'resetTokenExpiresAt',
-      challenge: 'webAuthnChallenge',
     },
 
     // Specifies attributes on the cookie that dbAuth sets in order to remember
