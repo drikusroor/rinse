@@ -33,7 +33,7 @@ const LoginPage = ({ type }) => {
 
   // should redirect right after login or wait to show the webAuthn prompts?
   useEffect(() => {
-    if (isAuthenticated && (!shouldShowWebAuthn || webAuthn.isEnabled())) {
+    if (isAuthenticated && (!shouldShowWebAuthn || webAuthn?.isEnabled())) {
       navigate(REDIRECT)
     }
   }, [isAuthenticated, shouldShowWebAuthn])
@@ -52,7 +52,7 @@ const LoginPage = ({ type }) => {
   }, [])
 
   const onSubmit = async (data) => {
-    const webAuthnSupported = await webAuthn.isSupported()
+    const webAuthnSupported = await webAuthn?.isSupported()
 
     if (webAuthnSupported) {
       setShouldShowWebAuthn(true)
@@ -202,7 +202,7 @@ const LoginPage = ({ type }) => {
 
   const formToRender = () => {
     if (showWebAuthn) {
-      if (webAuthn.isEnabled()) {
+      if (webAuthn?.isEnabled()) {
         return <AuthWebAuthnPrompt />
       } else {
         return <RegisterWebAuthnPrompt />
@@ -214,7 +214,7 @@ const LoginPage = ({ type }) => {
 
   const linkToRender = () => {
     if (showWebAuthn) {
-      if (webAuthn.isEnabled()) {
+      if (webAuthn?.isEnabled()) {
         return (
           <div className="rw-login-link">
             <span>or login with </span>{' '}
