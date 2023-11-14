@@ -33,7 +33,7 @@ const PlayFlashcard = ({
       <h2
         className={classNames(
           'relative text-center',
-          !flipped ? 'text-2xl font-bold' : 'text-sm text-gray-500'
+          !flipped ? 'mt-5 text-2xl font-bold' : 'text-sm text-gray-500'
         )}
       >
         {front}
