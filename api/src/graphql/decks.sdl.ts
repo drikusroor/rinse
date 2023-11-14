@@ -14,6 +14,7 @@ export const schema = gql`
   type Query {
     decks: [Deck!]! @requireAuth
     deck(id: Int!): Deck @requireAuth
+    userDecks(userId: Int!): [Deck!]! @requireAuth
   }
 
   input CreateDeckInput {

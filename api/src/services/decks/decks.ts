@@ -10,6 +10,12 @@ export const decks: QueryResolvers['decks'] = () => {
   return db.deck.findMany()
 }
 
+export const userDecks: QueryResolvers['userDecks'] = ({ userId }) => {
+  return db.deck.findMany({
+    where: { userId },
+  })
+}
+
 export const deck: QueryResolvers['deck'] = ({ id }) => {
   return db.deck.findUnique({
     where: { id },

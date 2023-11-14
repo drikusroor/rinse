@@ -1,5 +1,6 @@
 import { MetaTags } from '@redwoodjs/web'
 
+import { useAuth } from 'src/auth'
 import PlayDeckCell from 'src/components/PlayDeckCell'
 import {
   DEFAULT_PLAY_CONFIGURATION,
@@ -18,6 +19,10 @@ const PlayPage = ({
   answerMode = 'manual',
   inverse = false,
 }: PlayPageProps) => {
+  const { currentUser } = useAuth()
+
+  const userId = currentUser?.id
+
   const playConfiguration: PlayConfiguration = {
     ...DEFAULT_PLAY_CONFIGURATION,
     answerMode,
@@ -31,7 +36,7 @@ const PlayPage = ({
       {id ? (
         <PlayDeckCell id={id} playConfiguration={playConfiguration} />
       ) : (
-        <PlayOverviewCell />
+        <PlayOverviewCell userId={userId} />
       )}
     </>
   )

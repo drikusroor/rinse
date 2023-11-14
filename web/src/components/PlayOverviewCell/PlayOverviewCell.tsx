@@ -10,8 +10,8 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import PlayOverview from '../PlayOverview/PlayOverview'
 
 export const QUERY = gql`
-  query FindPlayOverviewQuery {
-    decks {
+  query FindPlayOverviewQuery($userId: Int!) {
+    decks: userDecks(userId: $userId) {
       id
       name
       description
