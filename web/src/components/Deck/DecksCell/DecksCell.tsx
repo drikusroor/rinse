@@ -5,9 +5,13 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import Decks from 'src/components/Deck/Decks'
 
+interface DecksCellProps {
+  userId: number
+}
+
 export const QUERY = gql`
-  query FindDecks {
-    decks {
+  query FindDecks($userId: Int!) {
+    decks: userDecks(userId: $userId) {
       id
       userId
       name
@@ -38,6 +42,8 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
-export const Success = ({ decks }: CellSuccessProps<FindDecks>) => {
+export const Success = ({
+  decks,
+}: CellSuccessProps<FindDecks> & DecksCellProps) => {
   return <Decks decks={decks} />
 }
