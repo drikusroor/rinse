@@ -1,10 +1,10 @@
+import type { CreateStudySetInput } from 'types/graphql'
+
 import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import StudySetForm from 'src/components/StudySet/StudySetForm'
-
-import type { CreateStudySetInput } from 'types/graphql'
 
 const CREATE_STUDY_SET_MUTATION = gql`
   mutation CreateStudySetMutation($input: CreateStudySetInput!) {

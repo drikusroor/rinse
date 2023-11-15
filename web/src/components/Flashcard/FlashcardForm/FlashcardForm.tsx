@@ -1,3 +1,5 @@
+import type { EditFlashcardById, UpdateFlashcardInput } from 'types/graphql'
+
 import {
   Form,
   FormError,
@@ -7,8 +9,6 @@ import {
   TextField,
   Submit,
 } from '@redwoodjs/forms'
-
-import type { EditFlashcardById, UpdateFlashcardInput } from 'types/graphql'
 import type { RWGqlError } from '@redwoodjs/forms'
 
 type FormFlashcard = NonNullable<EditFlashcardById['flashcard']>

@@ -45,8 +45,8 @@ export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => (
   <p className="text-sand">
-    You haven't created any decks or study sets yet. Get started by clicking
-    creating a
+    You haven&apos;t created any decks or study sets yet. Get started by
+    clicking creating a
     <Link
       to={routes.newDeck()}
       className="group ml-3 inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-semibold text-sand transition-colors hover:text-salmon-light"

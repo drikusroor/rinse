@@ -40,7 +40,7 @@ const PlayTextQuestion = ({
     return answer.some((a) => back.includes(a))
   }
 
-  const onSubmit = (data, e) => {
+  const onSubmit = (data) => {
     if (isCorrect(data.answer.split(';'), back)) {
       setState('correct')
       onCorrect()

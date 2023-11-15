@@ -30,7 +30,7 @@ const DeckForm = (props: DeckFormProps) => {
 
   const formRef = React.useRef<HTMLFormElement>(null)
 
-  const onAddFlashCard = (data: Flashcard) => {
+  const onAddFlashCard = (data: Partial<Flashcard>) => {
     const flashcard = {
       ...data,
     }

@@ -69,7 +69,6 @@ const LoginPage = () => {
         disabled={isLoggingIn}
         errorClassName="rw-input rw-input-error"
         ref={emailRef}
-        autoFocus
         validation={{
           required: {
             value: true,

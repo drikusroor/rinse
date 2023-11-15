@@ -4,7 +4,6 @@ import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import PlayFlashcards from 'src/components/PlayFlashcards/PlayFlashcards'
 import { timeTag } from 'src/lib/formatters'
 
 const DELETE_DECK_MUTATION = gql`
