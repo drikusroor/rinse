@@ -4,8 +4,8 @@ export function makeFlashcard(overrides: Partial<Flashcard> = {}): Flashcard {
   return {
     id: 1,
     deckId: 1,
-    front: 'Olá',
-    back: 'Hello',
+    front: ['Olá', 'Oi'],
+    back: ['Hello', 'Hi'],
     createdAt: new Date().toLocaleDateString(),
     updatedAt: new Date().toLocaleDateString(),
     ...overrides,
