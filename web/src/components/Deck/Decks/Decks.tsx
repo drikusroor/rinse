@@ -1,4 +1,4 @@
-import { FaPlus, FaServicestack, FaStackpath } from 'react-icons/fa'
+import { FaPlus } from 'react-icons/fa'
 import type { DeleteDeckMutationVariables, FindDecks } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
