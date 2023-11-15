@@ -1,14 +1,14 @@
+import type {
+  DeleteFlashcardMutationVariables,
+  FindFlashcards,
+} from 'types/graphql'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Flashcard/FlashcardsCell'
 import { timeTag, truncate } from 'src/lib/formatters'
-
-import type {
-  DeleteFlashcardMutationVariables,
-  FindFlashcards,
-} from 'types/graphql'
 
 const DELETE_FLASHCARD_MUTATION = gql`
   mutation DeleteFlashcardMutation($id: Int!) {

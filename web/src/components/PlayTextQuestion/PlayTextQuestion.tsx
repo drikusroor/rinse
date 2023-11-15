@@ -36,10 +36,12 @@ const PlayTextQuestion = ({
     inputRef.current?.focus()
   }, [flashcard])
 
-  const onSubmit = (data, e) => {
-    console.log(data, back, e)
+  const isCorrect = (answer, back) => {
+    return answer.some((a) => back.includes(a))
+  }
 
-    if (data.answer === back) {
+  const onSubmit = (data) => {
+    if (isCorrect(data.answer.split(';'), back)) {
       setState('correct')
       onCorrect()
     } else {
@@ -74,13 +76,15 @@ const PlayTextQuestion = ({
           !answered ? 'mt-5 text-2xl font-bold' : 'text-sm text-gray-500'
         )}
       >
-        {front}
+        {front.join(' / ')}
         {answered && (
           <div className="absolute left-1/2 top-full h-1/2 w-[1px] translate-x-1/2 bg-gray-500 text-xs"></div>
         )}
       </h2>
 
-      {answered && <h2 className="text-center text-2xl font-bold">{back}</h2>}
+      {answered && (
+        <h2 className="text-center text-2xl font-bold">{back.join(' / ')}</h2>
+      )}
 
       <Form
         onSubmit={onSubmit}

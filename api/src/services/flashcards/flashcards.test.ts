@@ -32,15 +32,15 @@ describe('flashcards', () => {
     const result = await createFlashcard({
       input: {
         deckId: scenario.flashcard.two.deckId,
-        front: 'String',
-        back: 'String',
+        front: ['String', 'Other string'],
+        back: ['String', 'Other string'],
         updatedAt: '2023-11-05T20:51:20.935Z',
       },
     })
 
     expect(result.deckId).toEqual(scenario.flashcard.two.deckId)
-    expect(result.front).toEqual('String')
-    expect(result.back).toEqual('String')
+    expect(result.front).toEqual(['String', 'Other string'])
+    expect(result.back).toEqual(['String', 'Other string'])
     expect(result.updatedAt).toEqual(new Date('2023-11-05T20:51:20.935Z'))
   })
 
@@ -50,10 +50,10 @@ describe('flashcards', () => {
     })) as Flashcard
     const result = await updateFlashcard({
       id: original.id,
-      input: { front: 'String2' },
+      input: { front: ['String2'] },
     })
 
-    expect(result.front).toEqual('String2')
+    expect(result.front).toEqual(['String2'])
   })
 
   scenario('deletes a flashcard', async (scenario: StandardScenario) => {

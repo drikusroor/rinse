@@ -1,10 +1,10 @@
+import type { CreateFlashcardInput } from 'types/graphql'
+
 import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import FlashcardForm from 'src/components/Flashcard/FlashcardForm'
-
-import type { CreateFlashcardInput } from 'types/graphql'
 
 const CREATE_FLASHCARD_MUTATION = gql`
   mutation CreateFlashcardMutation($input: CreateFlashcardInput!) {

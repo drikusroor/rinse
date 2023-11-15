@@ -1,26 +1,36 @@
 import { FaPlusSquare } from 'react-icons/fa'
-import { Flashcard } from 'types/graphql'
+import { CreateFlashcardInput, Flashcard } from 'types/graphql'
 
-import { Label, TextField, FieldError, Form } from '@redwoodjs/forms'
+import {
+  Label,
+  TextField,
+  FieldError,
+  Form,
+  RWGqlError,
+} from '@redwoodjs/forms'
 
 type FlashcardFormProps = {
   flashcard?: Flashcard
   onSave: (data: Flashcard) => void
-  error: any
+  error: RWGqlError
   loading: boolean
 }
 
-const DeckFlashcardForm = ({
-  flashcard,
-  onSave,
-  error,
-  loading,
-}: FlashcardFormProps) => {
-  const [state, setState] = React.useState<Pick<Flashcard, 'front' | 'back'>>(
-    flashcard || {
-      front: '',
-      back: '',
-    }
+const mapFlashcardToForm = (flashcard: Flashcard) => {
+  return {
+    front: flashcard.front.join(';'),
+    back: flashcard.back.join(';'),
+  }
+}
+
+const DeckFlashcardForm = ({ flashcard, onSave }: FlashcardFormProps) => {
+  const [state, setState] = React.useState<{ front: string; back: string }>(
+    flashcard
+      ? mapFlashcardToForm(flashcard)
+      : {
+          front: '',
+          back: '',
+        }
   )
 
   const onSubmit = (data) => {
@@ -30,7 +40,12 @@ const DeckFlashcardForm = ({
       back: '',
     })
 
-    onSave(data)
+    const flashcardData: Pick<CreateFlashcardInput, 'front' | 'back'> = {
+      front: data.front.split(';'),
+      back: data.back.split(';'),
+    }
+
+    onSave(flashcardData)
   }
 
   return (

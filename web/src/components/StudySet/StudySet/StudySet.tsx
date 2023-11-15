@@ -1,13 +1,13 @@
+import type {
+  DeleteStudySetMutationVariables,
+  FindStudySetById,
+} from 'types/graphql'
+
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { timeTag } from 'src/lib/formatters'
-
-import type {
-  DeleteStudySetMutationVariables,
-  FindStudySetById,
-} from 'types/graphql'
 
 const DELETE_STUDY_SET_MUTATION = gql`
   mutation DeleteStudySetMutation($id: Int!) {

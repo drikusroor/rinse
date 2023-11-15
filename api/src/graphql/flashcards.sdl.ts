@@ -3,8 +3,8 @@ export const schema = gql`
     id: Int!
     deckId: Int!
     deck: Deck!
-    front: String!
-    back: String!
+    front: [String]!
+    back: [String]!
     createdAt: DateTime!
     updatedAt: DateTime!
   }
@@ -16,25 +16,25 @@ export const schema = gql`
 
   input CreateFlashcardInput {
     deckId: Int!
-    front: String!
-    back: String!
+    front: [String]!
+    back: [String]!
   }
 
   input CreateDeckFlashcardInput {
-    front: String!
-    back: String!
+    front: [String]!
+    back: [String]!
   }
 
   input UpdateFlashcardInput {
     deckId: Int
-    front: String
-    back: String
+    front: [String]!
+    back: [String]!
   }
 
   input UpdateDeckFlashcardInput {
     id: Int
-    front: String
-    back: String
+    front: [String]!
+    back: [String]!
   }
 
   type Mutation {

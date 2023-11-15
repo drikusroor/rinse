@@ -36,13 +36,15 @@ const PlayFlashcard = ({
           !flipped ? 'mt-5 text-2xl font-bold' : 'text-sm text-gray-500'
         )}
       >
-        {front}
+        {front.join(' / ')}
         {flipped && (
           <div className="absolute left-1/2 top-full h-1/2 w-[1px] translate-x-1/2 bg-gray-500 text-xs"></div>
         )}
       </h2>
 
-      {flipped && <h2 className="text-center text-2xl font-bold">{back}</h2>}
+      {flipped && (
+        <h2 className="text-center text-2xl font-bold">{back.join(' / ')}</h2>
+      )}
 
       {!flipped && (
         <button

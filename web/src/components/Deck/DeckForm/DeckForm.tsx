@@ -1,4 +1,4 @@
-import type { EditDeckById, UpdateDeckInput } from 'types/graphql'
+import type { EditDeckById, Flashcard, UpdateDeckInput } from 'types/graphql'
 
 import {
   Form,
@@ -30,7 +30,7 @@ const DeckForm = (props: DeckFormProps) => {
 
   const formRef = React.useRef<HTMLFormElement>(null)
 
-  const onAddFlashCard = (data) => {
+  const onAddFlashCard = (data: Partial<Flashcard>) => {
     const flashcard = {
       ...data,
     }

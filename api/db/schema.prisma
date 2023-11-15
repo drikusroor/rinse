@@ -32,8 +32,8 @@ model Flashcard {
   id        Int      @id @default(autoincrement())
   deckId    Int
   deck      Deck     @relation(fields: [deckId], references: [id])
-  front     String
-  back      String
+  front     String[]
+  back      String[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
