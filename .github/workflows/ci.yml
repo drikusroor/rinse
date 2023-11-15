@@ -47,7 +47,7 @@ jobs:
       # install all the dependencies
       - run: yarn install
       # lint the code
-      - run: yarn lint
+      - run: yarn rw lint
       # build the redwood app
       - run: yarn rw build
       # run the api tests
