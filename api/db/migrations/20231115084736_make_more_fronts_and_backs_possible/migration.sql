@@ -1,12 +1,25 @@
-/*
-  Warnings:
+-- Start a transaction
+BEGIN;
 
-  - The `front` column on the `Flashcard` table would be dropped and recreated. This will lead to data loss if there is data in the column.
-  - The `back` column on the `Flashcard` table would be dropped and recreated. This will lead to data loss if there is data in the column.
+-- Step 1: Add new columns without dropping the old ones
+ALTER TABLE "Flashcard"
+ADD COLUMN "new_front" TEXT[],
+ADD COLUMN "new_back" TEXT[];
 
-*/
--- AlterTable
-ALTER TABLE "Flashcard" DROP COLUMN "front",
-ADD COLUMN     "front" TEXT[],
-DROP COLUMN "back",
-ADD COLUMN     "back" TEXT[];
+-- Step 2: Copy data from old columns to new columns
+UPDATE "Flashcard"
+SET "new_front" = ARRAY["front"],
+    "new_back" = ARRAY["back"];
+
+-- Step 3: Drop the old columns
+ALTER TABLE "Flashcard"
+DROP COLUMN "front",
+DROP COLUMN "back";
+
+-- Step 4: Rename the new columns to use the desired names
+ALTER TABLE "Flashcard"
+RENAME COLUMN "new_front" TO "front",
+RENAME COLUMN "new_back" TO "back";
+
+-- Commit the transaction
+COMMIT;
