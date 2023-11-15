@@ -37,7 +37,7 @@ const DashboardLayout = ({
                 {/* Logo area */}
               </div>
               {currentUser && (
-                <div className="hidden sm:-my-px sm:flex sm:space-x-8">
+                <div className="flex sm:-my-px sm:space-x-8">
                   {/* Navigation Links */}
                   <Link
                     to={routes.playOverview()}
@@ -63,7 +63,7 @@ const DashboardLayout = ({
                 </div>
               )}
             </div>
-            <div className="hidden md:flex md:items-center md:space-x-6">
+            <div className="flex items-center md:space-x-6">
               <div className="relative flex-shrink-0">
                 <div className="group inline-block text-left">
                   <button
