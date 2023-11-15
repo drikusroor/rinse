@@ -39,7 +39,18 @@ const DecksList = ({ decks }: FindDecks) => {
 
   return (
     <>
-      <div className="rw-segment rw-table-wrapper-responsive bg-sand drop-shadow-2xl">
+      <div className="flex flex-row justify-end">
+        <Link
+          to={routes.newDeck()}
+          className="inline-block rounded-lg bg-forest p-2 text-sand drop-shadow transition-colors hover:text-salmon"
+        >
+          <div className="flex flex-row items-center gap-2">
+            <div>Add new deck</div>
+            <FaPlus />
+          </div>
+        </Link>
+      </div>
+      <div className="rw-segment rw-table-wrapper-responsive mt-5 bg-sand drop-shadow-2xl">
         <table className="rw-table">
           <thead>
             <tr>
@@ -103,15 +114,6 @@ const DecksList = ({ decks }: FindDecks) => {
           </tbody>
         </table>
       </div>
-      <Link
-        to={routes.newDeck()}
-        className="mt-5 inline-block rounded-lg bg-forest p-2 text-sand drop-shadow transition-colors hover:text-salmon"
-      >
-        <div className="flex flex-row items-center gap-2">
-          <div>Add new deck</div>
-          <FaPlus />
-        </div>
-      </Link>
     </>
   )
 }
