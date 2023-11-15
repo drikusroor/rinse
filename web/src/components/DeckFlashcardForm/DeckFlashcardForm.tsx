@@ -10,17 +10,26 @@ type FlashcardFormProps = {
   loading: boolean
 }
 
+const mapFlashcardToForm = (flashcard: Flashcard) => {
+  return {
+    front: flashcard.front.join(';'),
+    back: flashcard.back.join(';'),
+  }
+}
+
 const DeckFlashcardForm = ({
   flashcard,
   onSave,
   error,
   loading,
 }: FlashcardFormProps) => {
-  const [state, setState] = React.useState<Pick<Flashcard, 'front' | 'back'>>(
-    flashcard || {
-      front: '',
-      back: '',
-    }
+  const [state, setState] = React.useState<{ front: string; back: string }>(
+    flashcard
+      ? mapFlashcardToForm(flashcard)
+      : {
+          front: '',
+          back: '',
+        }
   )
 
   const onSubmit = (data) => {
@@ -30,7 +39,12 @@ const DeckFlashcardForm = ({
       back: '',
     })
 
-    onSave(data)
+    const flashcardData = {
+      front: data.front.split(';'),
+      back: data.back.split(';'),
+    }
+
+    onSave(flashcardData)
   }
 
   return (
