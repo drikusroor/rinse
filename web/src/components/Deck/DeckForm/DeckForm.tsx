@@ -21,6 +21,7 @@ interface DeckFormProps {
   onSave: (data: UpdateDeckInput, id?: FormDeck['id']) => void
   error: RWGqlError
   loading: boolean
+  deleteFlashcard?: (id: Flashcard['id']) => void
 }
 
 const DeckForm = (props: DeckFormProps) => {
@@ -42,6 +43,18 @@ const DeckForm = (props: DeckFormProps) => {
     }
 
     setFlashcards([...flashcards, data])
+  }
+
+  const onDeleteFlashcard = (index: number) => {
+    const flashcard = { ...flashcards[index] }
+
+    if (flashcard.id) {
+      const { id } = flashcard
+
+      props.deleteFlashcard?.(id)
+    }
+
+    return setFlashcards(flashcards.filter((_, i) => i !== index))
   }
 
   const onSubmit = (data: FormDeck) => {
@@ -76,7 +89,12 @@ const DeckForm = (props: DeckFormProps) => {
 
           <div className="mt-3 flex flex-row flex-wrap gap-4">
             {flashcards.map((flashcard, index) => (
-              <FlashCardFormItem key={index} flashcard={flashcard} />
+              <FlashCardFormItem
+                key={index}
+                index={index}
+                flashcard={flashcard}
+                onDelete={onDeleteFlashcard}
+              />
             ))}
             <div className="basis-full">
               <DeckFlashcardForm

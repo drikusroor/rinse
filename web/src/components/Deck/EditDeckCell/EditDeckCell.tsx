@@ -39,6 +39,14 @@ const UPDATE_USER_DECK_MUTATION = gql`
   }
 `
 
+const DELETE_FLASHCARD_MUTATION = gql`
+  mutation DeleteFlashcardMutation($id: Int!) {
+    deleteFlashcard(id: $id) {
+      id
+    }
+  }
+`
+
 export const Loading = () => <div>Loading...</div>
 
 export const Failure = ({ error }: CellFailureProps) => (
@@ -60,6 +68,15 @@ export const Success = ({ deck }: CellSuccessProps<EditDeckById>) => {
     }
   )
 
+  const [deleteFlashcard] = useMutation(DELETE_FLASHCARD_MUTATION, {
+    onCompleted: () => {
+      toast.success('Flashcard deleted')
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
+
   const onSave = (
     input: UpdateUserDeckInput,
     id: EditDeckById['deck']['id']
@@ -75,7 +92,13 @@ export const Success = ({ deck }: CellSuccessProps<EditDeckById>) => {
         </h2>
       </header>
       <div className="rw-segment-main">
-        <DeckForm deck={deck} onSave={onSave} error={error} loading={loading} />
+        <DeckForm
+          deck={deck}
+          onSave={onSave}
+          error={error}
+          loading={loading}
+          deleteFlashcard={(id) => deleteFlashcard({ variables: { id } })}
+        />
       </div>
     </div>
   )
