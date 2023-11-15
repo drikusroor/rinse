@@ -87,7 +87,8 @@ const PlayOverview = ({ decks, studySets }: PlayOverviewProps) => {
           ))}
         </ul>
       </section>
-      <section className="mt-8">
+      {/* Hidden until we have study sets working */}
+      <section className="mt-8 hidden">
         <h2 className="text-2xl font-bold text-sand">Study Sets</h2>
         <ul className="mt-3 flex flex-wrap gap-4">
           {studySets.map((studySet) => (
