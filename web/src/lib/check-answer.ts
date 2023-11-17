@@ -6,11 +6,12 @@ function trimAndLowercase(str: string) {
 
 export function checkAnswer(
   userAnswer: string,
-  possibleAnswers: string[] = []
+  possibleAnswers: string[] = [],
+  allowedDistance = 2
 ) {
   const trimmedUserAnswer = trimAndLowercase(userAnswer)
 
-  possibleAnswers.map((answer) => {
+  return possibleAnswers.some((answer) => {
     const trimmedAnswer = trimAndLowercase(answer)
 
     if (trimmedUserAnswer === trimmedAnswer) {
@@ -19,13 +20,9 @@ export function checkAnswer(
 
     const distance = levenshtein(trimmedUserAnswer, trimmedAnswer)
 
-    // levenshtein distance should be equal or lower than 2
-    if (distance <= 2) {
-      return true
-    }
+    // levenshtein distance should be equal or lower than x (default 2)
+    return distance <= allowedDistance
   })
-
-  return false
 }
 
 export default checkAnswer
