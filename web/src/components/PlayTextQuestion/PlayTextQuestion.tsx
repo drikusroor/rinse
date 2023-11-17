@@ -7,6 +7,9 @@ import { Form, InputField } from '@redwoodjs/forms'
 import checkAnswer from 'src/lib/check-answer'
 import classNames from 'src/lib/class-names'
 
+import correctAudio from '../../../public/audio/correct.wav'
+import incorrectAudio from '../../../public/audio/incorrect.wav'
+
 type PlayTextQuestionProps = {
   index?: number
   flashcard: Flashcard
@@ -86,6 +89,14 @@ const PlayTextQuestion = ({
 
       {answered && (
         <h2 className="text-center text-2xl font-bold">{back.join(' / ')}</h2>
+      )}
+
+      {answered && (
+        <audio
+          src={state === 'correct' ? correctAudio : incorrectAudio}
+          autoPlay
+          hidden
+        />
       )}
 
       <Form
