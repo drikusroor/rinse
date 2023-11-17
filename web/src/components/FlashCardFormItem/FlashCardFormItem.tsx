@@ -13,7 +13,7 @@ const FlashCardFormItem = ({
   onDelete,
 }: FlashCardFormItemProps) => {
   return (
-    <div className="group relative min-w-[120px] rounded-lg border bg-amber-500 p-3">
+    <div className="group relative break-inside-avoid rounded-lg border bg-amber-500 p-3">
       <h3 className="rounded-lg border bg-amber-400 p-3">
         {flashcard?.front.map((front) => (
           <div key={front}>{front}</div>

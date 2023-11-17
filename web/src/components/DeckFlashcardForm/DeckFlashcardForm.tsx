@@ -24,6 +24,8 @@ const mapFlashcardToForm = (flashcard: Flashcard) => {
 }
 
 const DeckFlashcardForm = ({ flashcard, onSave }: FlashcardFormProps) => {
+  const frontInputRef = React.useRef<HTMLInputElement>(null)
+
   const [state, setState] = React.useState<{ front: string; back: string }>(
     flashcard
       ? mapFlashcardToForm(flashcard)
@@ -46,6 +48,9 @@ const DeckFlashcardForm = ({ flashcard, onSave }: FlashcardFormProps) => {
     }
 
     onSave(flashcardData)
+
+    // focus front input
+    frontInputRef.current?.focus()
   }
 
   return (
@@ -70,6 +75,7 @@ const DeckFlashcardForm = ({ flashcard, onSave }: FlashcardFormProps) => {
         validation={{ required: true }}
         value={state.front}
         onChange={(e) => setState({ ...state, front: e.target.value })}
+        ref={frontInputRef}
       />
 
       <FieldError name="front" className="rw-field-error" />
