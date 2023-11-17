@@ -40,7 +40,7 @@ const PlayTextQuestion = ({
   const isCorrect = (answer, back) => checkAnswer(answer, back)
 
   const onSubmit = (data) => {
-    if (isCorrect(data.answer.split(';'), back)) {
+    if (isCorrect(data.answer, back)) {
       setState('correct')
       onCorrect()
     } else {
