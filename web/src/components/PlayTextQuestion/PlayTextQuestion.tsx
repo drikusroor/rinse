@@ -4,6 +4,7 @@ import { Flashcard } from 'types/graphql'
 
 import { Form, InputField } from '@redwoodjs/forms'
 
+import checkAnswer from 'src/lib/check-answer'
 import classNames from 'src/lib/class-names'
 
 type PlayTextQuestionProps = {
@@ -36,9 +37,7 @@ const PlayTextQuestion = ({
     inputRef.current?.focus()
   }, [flashcard])
 
-  const isCorrect = (answer, back) => {
-    return answer.some((a) => back.includes(a))
-  }
+  const isCorrect = (answer, back) => checkAnswer(answer, back)
 
   const onSubmit = (data) => {
     if (isCorrect(data.answer.split(';'), back)) {
