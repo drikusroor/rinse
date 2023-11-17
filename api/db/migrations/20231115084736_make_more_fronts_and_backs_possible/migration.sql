@@ -10,9 +10,8 @@ UPDATE "Flashcard" SET "new_front" = ARRAY["front"];
 UPDATE "Flashcard" SET "new_back" = ARRAY["back"];
 
 -- Step 3: Drop the old columns
-ALTER TABLE "Flashcard"
-DROP COLUMN "front",
-DROP COLUMN "back";
+ALTER TABLE "Flashcard" DROP COLUMN "front";
+ALTER TABLE "Flashcard" DROP COLUMN "back";
 
 -- Step 4: Rename the new columns to use the desired names
 ALTER TABLE "Flashcard" RENAME COLUMN "new_front" TO "front";
