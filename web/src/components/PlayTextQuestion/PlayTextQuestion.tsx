@@ -96,7 +96,9 @@ const PlayTextQuestion = ({
           src={state === 'correct' ? correctAudio : incorrectAudio}
           autoPlay
           hidden
-        />
+        >
+          <track kind="captions" />
+        </audio>
       )}
 
       <Form
