@@ -34,7 +34,10 @@ const PlayTextQuestion = ({
   useEffect(() => {
     setAnswered(false)
     setState('none')
-    inputRef.current?.focus()
+    // wait 1ms to focus the input
+    setTimeout(() => {
+      inputRef.current?.focus()
+    }, 1)
   }, [flashcard])
 
   const isCorrect = (answer, back) => checkAnswer(answer, back)
