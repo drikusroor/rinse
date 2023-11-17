@@ -87,22 +87,24 @@ const DeckForm = (props: DeckFormProps) => {
         <div className="mt-5 rounded-lg border bg-gray-200 p-5">
           <h3 className="text-xl font-bold">Flashcards</h3>
 
-          <div className="mt-3 flex flex-row flex-wrap gap-4">
+          {/* grid masonry */}
+          <div className="my-4 columns-3 gap-4">
             {flashcards.map((flashcard, index) => (
-              <FlashCardFormItem
-                key={index}
-                index={index}
-                flashcard={flashcard}
-                onDelete={onDeleteFlashcard}
-              />
+              <div className="mb-4" key={index}>
+                <FlashCardFormItem
+                  index={index}
+                  flashcard={flashcard}
+                  onDelete={onDeleteFlashcard}
+                />
+              </div>
             ))}
-            <div className="basis-full">
-              <DeckFlashcardForm
-                onSave={onAddFlashCard}
-                error={null}
-                loading={false}
-              />
-            </div>
+          </div>
+          <div className="basis-full">
+            <DeckFlashcardForm
+              onSave={onAddFlashCard}
+              error={null}
+              loading={false}
+            />
           </div>
         </div>
       </div>
