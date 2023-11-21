@@ -1,4 +1,5 @@
 import type { Prisma, FlashcardInteraction } from '@prisma/client'
+
 import type { ScenarioData } from '@redwoodjs/testing/api'
 
 export const standard = defineScenario<Prisma.FlashcardInteractionCreateArgs>({
@@ -10,8 +11,8 @@ export const standard = defineScenario<Prisma.FlashcardInteractionCreateArgs>({
         correct: true,
         flashcard: {
           create: {
-            front: 'String',
-            back: 'String',
+            front: ['String'],
+            back: ['String'],
             updatedAt: '2023-11-21T17:07:52.172Z',
             deck: {
               create: {
@@ -50,8 +51,8 @@ export const standard = defineScenario<Prisma.FlashcardInteractionCreateArgs>({
         correct: true,
         flashcard: {
           create: {
-            front: 'String',
-            back: 'String',
+            front: ['String'],
+            back: ['String'],
             updatedAt: '2023-11-21T17:07:52.172Z',
             deck: {
               create: {
@@ -72,6 +73,7 @@ export const standard = defineScenario<Prisma.FlashcardInteractionCreateArgs>({
           create: {
             updatedAt: '2023-11-21T17:07:52.172Z',
             startedAt: '2023-11-21T17:07:52.172Z',
+            endedAt: '2023-11-21T17:07:52.172Z',
             user: {
               create: {
                 email: 'String1075712',
