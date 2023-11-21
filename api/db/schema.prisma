@@ -16,7 +16,8 @@ model User {
   resetToken          String?
   resetTokenExpiresAt DateTime?
   credentials         UserCredential[]
-  Deck                Deck[]
+  deck                Deck[]
+  PlaySession         PlaySession[]
 }
 
 model UserCredential {
@@ -36,6 +37,7 @@ model Flashcard {
   back      String[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  interactions FlashcardInteraction[]
 }
 
 model Deck {
@@ -48,6 +50,7 @@ model Deck {
   updatedAt     DateTime       @updatedAt
   flashcards    Flashcard[]
   studySetDecks StudySetDeck[]
+  playSessions  PlaySession[]
 }
 
 model StudySet {
@@ -57,6 +60,7 @@ model StudySet {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   studySetDecks StudySetDeck[]
+  playSessions  PlaySession[]
 }
 
 model StudySetDeck {
@@ -67,4 +71,28 @@ model StudySetDeck {
   deck       Deck     @relation(fields: [deckId], references: [id])
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+}
+
+model PlaySession {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deckId    Int?
+  deck      Deck?    @relation(fields: [deckId], references: [id])
+  studySetId Int?
+  studySet   StudySet? @relation(fields: [studySetId], references: [id])
+  flashcardInteractions FlashcardInteraction[]
+}
+
+model FlashcardInteraction {
+  id        Int      @id @default(autoincrement())
+  flashcardId Int
+  flashcard Flashcard @relation(fields: [flashcardId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  correct   Boolean
+  playSessionId Int
+  playSession PlaySession @relation(fields: [playSessionId], references: [id])
 }
