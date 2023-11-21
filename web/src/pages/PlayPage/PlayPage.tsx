@@ -1,3 +1,7 @@
+import { useEffect } from 'react'
+
+import { PlaySession } from 'types/graphql'
+
 import { MetaTags } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
@@ -7,6 +11,7 @@ import {
   PlayConfiguration,
 } from 'src/components/PlayFlashcards/PlayFlashcards'
 import PlayOverviewCell from 'src/components/PlayOverviewCell'
+import { useBoundStore } from 'src/store'
 
 type PlayPageProps = {
   id: number
@@ -21,6 +26,8 @@ const PlayPage = ({
 }: PlayPageProps) => {
   const { currentUser } = useAuth()
 
+  const setPlaySession = useBoundStore((state) => state.setPlaySession)
+
   const userId = currentUser?.id
 
   const playConfiguration: PlayConfiguration = {
@@ -28,6 +35,18 @@ const PlayPage = ({
     answerMode,
     inverse,
   }
+
+  useEffect(() => {
+    const playSession: Partial<PlaySession> = {
+      userId,
+      deckId: id,
+      flashcardInteractions: [],
+    }
+
+    setPlaySession(playSession)
+
+    console.log('playSession', playSession)
+  })
 
   return (
     <>
