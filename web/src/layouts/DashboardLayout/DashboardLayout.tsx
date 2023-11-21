@@ -32,10 +32,14 @@ const DashboardLayout = ({
       <nav className="bg-white shadow">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 justify-between">
+            <div className="flex flex-shrink-0 items-center">
+              <img
+                className="block h-8 w-auto"
+                srcSet="/images/logo-320.webp, /images/logo-320.png"
+                alt="Logo"
+              />
+            </div>
             <div className="flex">
-              <div className="flex flex-shrink-0 items-center">
-                {/* Logo area */}
-              </div>
               {currentUser && (
                 <div className="flex sm:-my-px sm:space-x-8">
                   {/* Navigation Links */}
