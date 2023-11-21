@@ -1,6 +1,7 @@
-import { Flashcard } from 'types/graphql'
+import { CreatePlaySessionInput, Flashcard } from 'types/graphql'
 
 import wait from 'src/lib/wait'
+import { useBoundStore } from 'src/store'
 
 import PlayFlashcard from '../PlayFlashcard/PlayFlashcard'
 import PlayFlashcardsResults from '../PlayFlashcardsResults/PlayFlashcardsResults'
@@ -23,10 +24,13 @@ export const DEFAULT_PLAY_CONFIGURATION: PlayConfiguration = {
 type PlayFlashcardsProps = {
   playConfiguration?: PlayConfiguration
   flashcards: Flashcard[]
+  onSavePlaySession?: (createPlaySessionInput: CreatePlaySessionInput) => void
 }
 
 const PlayFlashcards = (props: PlayFlashcardsProps) => {
-  const { flashcards = [] } = props
+  const { flashcards = [], onSavePlaySession } = props
+
+  const { playSession, setPlaySession } = useBoundStore((state) => state)
 
   const playConfiguration = {
     amountOfFlashcardsToPlay: flashcards.length,
@@ -45,7 +49,6 @@ const PlayFlashcards = (props: PlayFlashcardsProps) => {
   const [streak, setStreak] = React.useState(0)
   const [maxStreak, setMaxStreak] = React.useState(0)
   const [startTime] = React.useState(Date.now())
-  const [endTime, setEndTime] = React.useState(Date.now())
   const [timeElapsed, setTimeElapsed] = React.useState(0)
 
   const nextQuestion = () => {
@@ -54,8 +57,24 @@ const PlayFlashcards = (props: PlayFlashcardsProps) => {
     }
 
     if (answerCount + 1 === amountOfFlashcardsToPlay) {
-      setEndTime(Date.now())
+      const endTime = Date.now()
+      const endedAt = new Date(endTime).toISOString()
       setTimeElapsed(endTime - startTime)
+
+      setPlaySession({
+        ...playSession,
+        endedAt,
+      })
+
+      if (onSavePlaySession) {
+        const createPlaySessionInput: CreatePlaySessionInput = {
+          userId: playSession.userId,
+          deckId: playSession.deckId,
+          startedAt: playSession.startedAt,
+          endedAt,
+        }
+        onSavePlaySession(createPlaySessionInput)
+      }
     }
 
     setCurrentFlashcardIndex((currentFlashcardIndex + 1) % flashcards.length)

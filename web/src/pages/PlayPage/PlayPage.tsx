@@ -41,6 +41,7 @@ const PlayPage = ({
       userId,
       deckId: id,
       flashcardInteractions: [],
+      startedAt: new Date().toISOString(),
     }
 
     setPlaySession(playSession)

@@ -8,7 +8,11 @@ type PlayDeckCellProps = {
   playConfiguration?: PlayConfiguration
 }
 
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import {
+  type CellSuccessProps,
+  type CellFailureProps,
+  useMutation,
+} from '@redwoodjs/web'
 
 import PlayFlashcards from '../PlayFlashcards/PlayFlashcards'
 
@@ -23,6 +27,20 @@ export const QUERY = gql`
         front
         back
       }
+    }
+  }
+`
+
+const CREATE_PLAY_SESSION_MUTATION = gql`
+  mutation CreatePlaySessionMutation($input: CreatePlaySessionInput!) {
+    createPlaySession(input: $input) {
+      id
+      userId
+      deckId
+      createdAt
+      updatedAt
+      startedAt
+      endedAt
     }
   }
 `
@@ -42,10 +60,23 @@ export const Success = ({
   playConfiguration,
 }: CellSuccessProps<FindPlayDeckQuery, FindPlayDeckQueryVariables> &
   PlayDeckCellProps) => {
+  const [onSavePlaySession] = useMutation(CREATE_PLAY_SESSION_MUTATION, {
+    onCompleted: () => {
+      console.log('Play session saved')
+    },
+  })
+
   return (
     <PlayFlashcards
       flashcards={deck.flashcards}
       playConfiguration={playConfiguration}
+      onSavePlaySession={(createPlaySessionInput) => {
+        onSavePlaySession({
+          variables: {
+            input: createPlaySessionInput,
+          },
+        })
+      }}
     />
   )
 }
