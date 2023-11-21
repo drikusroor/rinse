@@ -5,6 +5,8 @@ export const schema = gql`
     user: User!
     createdAt: DateTime!
     updatedAt: DateTime!
+    startedAt: DateTime!
+    endedAt: DateTime
     deckId: Int
     deck: Deck
     studySetId: Int
@@ -19,12 +21,16 @@ export const schema = gql`
 
   input CreatePlaySessionInput {
     userId: Int!
+    startedAt: DateTime!
+    endedAt: DateTime
     deckId: Int
     studySetId: Int
   }
 
   input UpdatePlaySessionInput {
     userId: Int
+    startedAt: DateTime
+    endedAt: DateTime
     deckId: Int
     studySetId: Int
   }

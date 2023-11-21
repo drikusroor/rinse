@@ -35,12 +35,14 @@ describe('playSessions', () => {
     const result = await createPlaySession({
       input: {
         userId: scenario.playSession.two.userId,
-        updatedAt: '2023-11-21T16:51:07.328Z',
+        updatedAt: '2023-11-21T17:07:37.052Z',
+        startedAt: '2023-11-21T17:07:37.052Z',
       },
     })
 
     expect(result.userId).toEqual(scenario.playSession.two.userId)
-    expect(result.updatedAt).toEqual(new Date('2023-11-21T16:51:07.328Z'))
+    expect(result.updatedAt).toEqual(new Date('2023-11-21T17:07:37.052Z'))
+    expect(result.startedAt).toEqual(new Date('2023-11-21T17:07:37.052Z'))
   })
 
   scenario('updates a playSession', async (scenario: StandardScenario) => {
@@ -49,10 +51,10 @@ describe('playSessions', () => {
     })) as PlaySession
     const result = await updatePlaySession({
       id: original.id,
-      input: { updatedAt: '2023-11-22T16:51:07.329Z' },
+      input: { updatedAt: '2023-11-22T17:07:37.053Z' },
     })
 
-    expect(result.updatedAt).toEqual(new Date('2023-11-22T16:51:07.329Z'))
+    expect(result.updatedAt).toEqual(new Date('2023-11-22T17:07:37.053Z'))
   })
 
   scenario('deletes a playSession', async (scenario: StandardScenario) => {

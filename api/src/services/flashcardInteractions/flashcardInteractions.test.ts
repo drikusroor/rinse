@@ -44,7 +44,8 @@ describe('flashcardInteractions', () => {
       const result = await createFlashcardInteraction({
         input: {
           flashcardId: scenario.flashcardInteraction.two.flashcardId,
-          updatedAt: '2023-11-21T16:50:43.267Z',
+          updatedAt: '2023-11-21T17:07:52.044Z',
+          startedAt: '2023-11-21T17:07:52.044Z',
           correct: true,
           playSessionId: scenario.flashcardInteraction.two.playSessionId,
         },
@@ -53,7 +54,8 @@ describe('flashcardInteractions', () => {
       expect(result.flashcardId).toEqual(
         scenario.flashcardInteraction.two.flashcardId
       )
-      expect(result.updatedAt).toEqual(new Date('2023-11-21T16:50:43.267Z'))
+      expect(result.updatedAt).toEqual(new Date('2023-11-21T17:07:52.044Z'))
+      expect(result.startedAt).toEqual(new Date('2023-11-21T17:07:52.044Z'))
       expect(result.correct).toEqual(true)
       expect(result.playSessionId).toEqual(
         scenario.flashcardInteraction.two.playSessionId
@@ -69,10 +71,10 @@ describe('flashcardInteractions', () => {
       })) as FlashcardInteraction
       const result = await updateFlashcardInteraction({
         id: original.id,
-        input: { updatedAt: '2023-11-22T16:50:43.268Z' },
+        input: { updatedAt: '2023-11-22T17:07:52.044Z' },
       })
 
-      expect(result.updatedAt).toEqual(new Date('2023-11-22T16:50:43.268Z'))
+      expect(result.updatedAt).toEqual(new Date('2023-11-22T17:07:52.044Z'))
     }
   )
 

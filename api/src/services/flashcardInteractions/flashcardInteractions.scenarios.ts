@@ -5,20 +5,21 @@ export const standard = defineScenario<Prisma.FlashcardInteractionCreateArgs>({
   flashcardInteraction: {
     one: {
       data: {
-        updatedAt: '2023-11-21T16:50:43.399Z',
+        updatedAt: '2023-11-21T17:07:52.172Z',
+        startedAt: '2023-11-21T17:07:52.172Z',
         correct: true,
         flashcard: {
           create: {
             front: 'String',
             back: 'String',
-            updatedAt: '2023-11-21T16:50:43.399Z',
+            updatedAt: '2023-11-21T17:07:52.172Z',
             deck: {
               create: {
                 name: 'String',
-                updatedAt: '2023-11-21T16:50:43.399Z',
+                updatedAt: '2023-11-21T17:07:52.172Z',
                 user: {
                   create: {
-                    email: 'String3546236',
+                    email: 'String6703681',
                     hashedPassword: 'String',
                     salt: 'String',
                   },
@@ -29,10 +30,11 @@ export const standard = defineScenario<Prisma.FlashcardInteractionCreateArgs>({
         },
         playSession: {
           create: {
-            updatedAt: '2023-11-21T16:50:43.399Z',
+            updatedAt: '2023-11-21T17:07:52.172Z',
+            startedAt: '2023-11-21T17:07:52.172Z',
             user: {
               create: {
-                email: 'String4561250',
+                email: 'String4033566',
                 hashedPassword: 'String',
                 salt: 'String',
               },
@@ -43,20 +45,21 @@ export const standard = defineScenario<Prisma.FlashcardInteractionCreateArgs>({
     },
     two: {
       data: {
-        updatedAt: '2023-11-21T16:50:43.399Z',
+        updatedAt: '2023-11-21T17:07:52.172Z',
+        startedAt: '2023-11-21T17:07:52.172Z',
         correct: true,
         flashcard: {
           create: {
             front: 'String',
             back: 'String',
-            updatedAt: '2023-11-21T16:50:43.399Z',
+            updatedAt: '2023-11-21T17:07:52.172Z',
             deck: {
               create: {
                 name: 'String',
-                updatedAt: '2023-11-21T16:50:43.399Z',
+                updatedAt: '2023-11-21T17:07:52.172Z',
                 user: {
                   create: {
-                    email: 'String1316795',
+                    email: 'String1062591',
                     hashedPassword: 'String',
                     salt: 'String',
                   },
@@ -67,10 +70,11 @@ export const standard = defineScenario<Prisma.FlashcardInteractionCreateArgs>({
         },
         playSession: {
           create: {
-            updatedAt: '2023-11-21T16:50:43.399Z',
+            updatedAt: '2023-11-21T17:07:52.172Z',
+            startedAt: '2023-11-21T17:07:52.172Z',
             user: {
               create: {
-                email: 'String3835705',
+                email: 'String1075712',
                 hashedPassword: 'String',
                 salt: 'String',
               },

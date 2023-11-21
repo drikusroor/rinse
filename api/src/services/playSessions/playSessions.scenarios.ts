@@ -5,10 +5,11 @@ export const standard = defineScenario<Prisma.PlaySessionCreateArgs>({
   playSession: {
     one: {
       data: {
-        updatedAt: '2023-11-21T16:51:07.397Z',
+        updatedAt: '2023-11-21T17:07:37.081Z',
+        startedAt: '2023-11-21T17:07:37.081Z',
         user: {
           create: {
-            email: 'String4230814',
+            email: 'String5854730',
             hashedPassword: 'String',
             salt: 'String',
           },
@@ -17,10 +18,11 @@ export const standard = defineScenario<Prisma.PlaySessionCreateArgs>({
     },
     two: {
       data: {
-        updatedAt: '2023-11-21T16:51:07.397Z',
+        updatedAt: '2023-11-21T17:07:37.081Z',
+        startedAt: '2023-11-21T17:07:37.081Z',
         user: {
           create: {
-            email: 'String1044431',
+            email: 'String7830704',
             hashedPassword: 'String',
             salt: 'String',
           },

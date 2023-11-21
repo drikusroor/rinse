@@ -5,6 +5,8 @@ export const schema = gql`
     flashcard: Flashcard!
     createdAt: DateTime!
     updatedAt: DateTime!
+    startedAt: DateTime!
+    endedAt: DateTime
     correct: Boolean!
     playSessionId: Int!
     playSession: PlaySession!
@@ -17,12 +19,16 @@ export const schema = gql`
 
   input CreateFlashcardInteractionInput {
     flashcardId: Int!
+    startedAt: DateTime!
+    endedAt: DateTime
     correct: Boolean!
     playSessionId: Int!
   }
 
   input UpdateFlashcardInteractionInput {
     flashcardId: Int
+    startedAt: DateTime
+    endedAt: DateTime
     correct: Boolean
     playSessionId: Int
   }

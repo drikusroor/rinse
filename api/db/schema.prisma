@@ -79,6 +79,8 @@ model PlaySession {
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  startedAt DateTime
+  endedAt   DateTime?
   deckId    Int?
   deck      Deck?    @relation(fields: [deckId], references: [id])
   studySetId Int?
@@ -92,6 +94,8 @@ model FlashcardInteraction {
   flashcard Flashcard @relation(fields: [flashcardId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  startedAt DateTime
+  endedAt   DateTime?
   correct   Boolean
   playSessionId Int
   playSession PlaySession @relation(fields: [playSessionId], references: [id])
