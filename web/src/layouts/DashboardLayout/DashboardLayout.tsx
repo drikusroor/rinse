@@ -1,11 +1,8 @@
-import { useState } from 'react'
-
 import { FaPlusCircle, FaUserCircle } from 'react-icons/fa'
 
 import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
-import Modal from 'src/components/Modal/Modal'
 
 interface AddNewButton {
   to: () => string
@@ -24,8 +21,6 @@ const DashboardLayout = ({
   title,
 }: DashboardLayoutProps) => {
   const { currentUser, logOut } = useAuth()
-
-  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <div className="relative min-h-screen">
