@@ -45,6 +45,22 @@ const DeckForm = (props: DeckFormProps) => {
     setFlashcards([...flashcards, data])
   }
 
+  const onUpdateFlashcard = (index: number, data: Partial<Flashcard>) => {
+    const flashcard = { ...flashcards[index], ...data }
+
+    const deckId = props.deck?.id
+
+    if (deckId) {
+      flashcard.deckId = deckId
+    }
+
+    setFlashcards([
+      ...flashcards.slice(0, index),
+      flashcard,
+      ...flashcards.slice(index + 1),
+    ])
+  }
+
   const onDeleteFlashcard = (index: number) => {
     const flashcard = { ...flashcards[index] }
 
@@ -95,6 +111,7 @@ const DeckForm = (props: DeckFormProps) => {
                   index={index}
                   flashcard={flashcard}
                   onDelete={onDeleteFlashcard}
+                  onSave={onUpdateFlashcard}
                 />
               </div>
             ))}

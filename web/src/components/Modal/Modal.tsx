@@ -12,6 +12,7 @@ interface ModalProps {
   cancelButtonText?: string
   onConfirm?: () => void
   onCancel: () => void
+  hideCloseButton?: boolean
 }
 
 type RenderState = 'open' | 'opening' | 'closed' | 'closing'
@@ -24,8 +25,11 @@ const Modal = ({
   cancelButtonText = 'Cancel',
   onConfirm,
   onCancel,
+  hideCloseButton = false,
 }: ModalProps) => {
   const [renderState, setRenderState] = useState<RenderState>('closed')
+
+  const showButtonBar = onConfirm || (onCancel && !hideCloseButton)
 
   useEffect(() => {
     if (isOpen) {
@@ -50,7 +54,7 @@ const Modal = ({
   return (
     <div
       className={classNames(
-        'fixed inset-0 h-full w-full overflow-y-auto bg-gray-600/50 transition-opacity',
+        'fixed inset-0 z-10 flex h-screen w-screen items-center justify-center overflow-y-auto bg-gray-600/50 transition-opacity',
         renderState === 'open' ? 'opacity-100' : 'pointer-events-none opacity-0'
       )}
       onClick={onCancel}
@@ -63,7 +67,7 @@ const Modal = ({
     >
       <div
         className={classNames(
-          'relative top-20 mx-auto w-96 rounded-md border bg-white p-5 shadow-lg transition-transform',
+          'relative w-96 rounded-md border bg-white p-5 shadow-lg transition-transform',
           renderState === 'open' ? 'translate-y-0' : '-translate-y-4'
         )}
         role="dialog"
@@ -80,27 +84,29 @@ const Modal = ({
           {children && <p className="text-sm text-gray-500">{children}</p>}
         </div>
 
-        <div className="mt-4">
-          {onCancel && (
-            <button
-              onClick={onCancel}
-              className="mb-1 mr-1 rounded bg-red-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none hover:shadow-md focus:outline-none active:bg-red-600"
-              style={{ transition: 'all .15s ease' }}
-            >
-              {cancelButtonText || 'Cancel'}
-            </button>
-          )}
+        {showButtonBar && (
+          <div className="mt-4 flex items-center justify-end gap-2">
+            {onCancel && !hideCloseButton && (
+              <button
+                onClick={onCancel}
+                className="mb-1 mr-1 rounded bg-red-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none hover:shadow-md focus:outline-none active:bg-red-600"
+                style={{ transition: 'all .15s ease' }}
+              >
+                {cancelButtonText || 'Cancel'}
+              </button>
+            )}
 
-          {onConfirm && (
-            <button
-              onClick={onConfirm}
-              className="mb-1 mr-1 rounded bg-green-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none hover:shadow-md focus:outline-none active:bg-green-600"
-              style={{ transition: 'all .15s ease' }}
-            >
-              {confirmButtonText}
-            </button>
-          )}
-        </div>
+            {onConfirm && (
+              <button
+                onClick={onConfirm}
+                className="mb-1 mr-1 rounded bg-green-500 px-4 py-2 text-xs font-bold uppercase text-white shadow outline-none hover:shadow-md focus:outline-none active:bg-green-600"
+                style={{ transition: 'all .15s ease' }}
+              >
+                {confirmButtonText}
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )
