@@ -33,11 +33,19 @@ const DashboardLayout = ({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 justify-between">
             <div className="flex flex-shrink-0 items-center">
-              <img
-                className="block h-8 w-auto"
-                srcSet="/images/logo-320.webp, /images/logo-320.png"
-                alt="Logo"
-              />
+              <Link
+                to={routes.home()}
+                className="transition hover:scale-125"
+                title="Home"
+                aria-label="Home"
+              >
+                <span className="sr-only">Home</span>
+                <img
+                  className="block h-8 w-auto"
+                  srcSet="/images/logo-320.webp, /images/logo-320.png"
+                  alt="Logo"
+                />
+              </Link>
             </div>
             <div className="flex">
               {currentUser && (
