@@ -45,8 +45,6 @@ const PlayPage = ({
     }
 
     setPlaySession(playSession)
-
-    console.log('playSession', playSession)
   })
 
   return (

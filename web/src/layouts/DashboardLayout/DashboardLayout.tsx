@@ -172,16 +172,11 @@ const DashboardLayout = ({
         </div>
       </header>
 
-      {/* Main content */}
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-          {/* Replace with your content */}
           <div className="px-4 py-6 sm:px-0">
-            <div className="">
-              {children} {/* Placeholder for page content */}
-            </div>
+            <div className="">{children}</div>
           </div>
-          {/* /End replace */}
         </div>
       </main>
     </div>
