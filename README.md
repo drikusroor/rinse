@@ -1,6 +1,13 @@
-# README
+# Rinse
 
-Welcome to [RedwoodJS](https://redwoodjs.com)!
+[![Redwood CI](https://github.com/drikusroor/rinse/actions/workflows/ci.yml/badge.svg)](https://github.com/drikusroor/rinse/actions/workflows/ci.yml)
+
+![Rinse logo](web/public/images/logo-320.webp)
+
+
+Rinse is a web app for learning languages and other things by reviewing flashcards or by taking quizzes. It is built with [RedwoodJS](https://redwoodjs.com/).
+
+## Getting started
 
 > **Prerequisites**
 >
