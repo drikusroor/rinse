@@ -7,6 +7,13 @@ import DashboardLayout from './DashboardLayout'
 
 describe('DashboardLayout', () => {
   it('renders successfully', () => {
+    mockCurrentUser({
+      id: 1,
+      email: 'Test User',
+      firstName: 'Test',
+      lastName: 'User',
+    })
+
     expect(() => {
       render(<DashboardLayout />)
     }).not.toThrow()
