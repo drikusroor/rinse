@@ -7,8 +7,17 @@ import EditUserForm from './EditUserForm'
 
 describe('EditUserForm', () => {
   it('renders successfully', () => {
+    const user = {
+      id: 1,
+      email: 'info@example.com',
+      firstName: 'John',
+      lastName: 'Doe',
+    }
+
+    const onSave = jest.fn()
+
     expect(() => {
-      render(<EditUserForm />)
+      render(<EditUserForm user={user} onSave={onSave} />)
     }).not.toThrow()
   })
 })

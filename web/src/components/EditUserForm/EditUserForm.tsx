@@ -8,8 +8,8 @@ import { getInputClasses, getInputErrorClasses } from '../Shared/Form'
 interface EditUserFormProps {
   user: EditUser
   onSave: (user: EditUser) => void
-  error: RWGqlError
-  loading: boolean
+  error?: RWGqlError
+  loading?: boolean
 }
 
 const EditUserForm = ({ user, onSave, loading, error }: EditUserFormProps) => {
