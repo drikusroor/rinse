@@ -17,6 +17,9 @@ const Routes = () => {
   return (
     <Router useAuth={useAuth}>
       <Set private unauthenticated="login">
+        <Set wrap={DashboardLayout} title="Account">
+          <Route path="/account" page={EditUserPage} name="editUser" />
+        </Set>
         <Set wrap={DashboardLayout} title="Play!">
           <Route path="/" page={PlayPage} name="playOverview" />
           <Route path="/play/decks/{id:Int}" page={PlayPage} name="playDeck" />

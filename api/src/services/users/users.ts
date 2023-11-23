@@ -4,6 +4,8 @@ import type {
   UserRelationResolvers,
 } from 'types/graphql'
 
+import { ForbiddenError } from '@redwoodjs/graphql-server'
+
 import { db } from 'src/lib/db'
 
 export const users: QueryResolvers['users'] = () => {
@@ -11,6 +13,21 @@ export const users: QueryResolvers['users'] = () => {
 }
 
 export const user: QueryResolvers['user'] = ({ id }) => {
+  return db.user.findUnique({
+    where: { id },
+  })
+}
+
+// user query that does not return sensitive information
+export const editUser: QueryResolvers['editUser'] = ({ id }) => {
+  const { currentUser } = context
+
+  console.log('currentUser', currentUser, id, currentUser?.id === id)
+
+  if (currentUser?.id !== id) {
+    throw new ForbiddenError('You are not authorized to access this user.')
+  }
+
   return db.user.findUnique({
     where: { id },
   })

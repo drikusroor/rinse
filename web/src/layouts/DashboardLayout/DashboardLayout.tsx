@@ -1,8 +1,10 @@
-import { FaPlusCircle, FaUserCircle } from 'react-icons/fa'
+import { FaPlusCircle } from 'react-icons/fa'
 
 import { Link, routes } from '@redwoodjs/router'
+import { Toaster } from '@redwoodjs/web/dist/toast'
 
 import { useAuth } from 'src/auth'
+import Avatar from 'src/components/Avatar/Avatar'
 
 interface AddNewButton {
   to: () => string
@@ -78,24 +80,7 @@ const DashboardLayout = ({
             <div className="flex items-center md:space-x-6">
               <div className="relative flex-shrink-0">
                 <div className="group inline-block text-left">
-                  <button
-                    type="button"
-                    className="flex rounded-full bg-sand text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    id="user-menu"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                    title={currentUser?.email}
-                    aria-label={currentUser?.email}
-                  >
-                    <span className="sr-only">Open user menu</span>
-                    {!currentUser ? (
-                      <FaUserCircle className="h-8 w-8 text-gray-500" />
-                    ) : (
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-forest to-salmon text-white">
-                        {currentUser?.email?.charAt(0).toUpperCase()}
-                      </div>
-                    )}
-                  </button>
+                  <Avatar user={currentUser}></Avatar>
                   <div className="absolute right-0 z-10 hidden group-hover:block">
                     <ul
                       className="mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5"
@@ -130,6 +115,14 @@ const DashboardLayout = ({
                         </>
                       ) : (
                         <>
+                          <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <Link
+                              to={routes.editUser()}
+                              className="block w-full text-left text-gray-700 hover:text-gray-900"
+                            >
+                              Account
+                            </Link>
+                          </li>
                           <li
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             role="menuitem"
@@ -173,6 +166,7 @@ const DashboardLayout = ({
       </header>
 
       <main>
+        <Toaster />
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="px-4 py-6 sm:px-0">
             <div className="">{children}</div>

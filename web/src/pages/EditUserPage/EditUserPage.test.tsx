@@ -1,21 +1,14 @@
 import { render } from '@redwoodjs/testing/web'
 
-import DashboardLayout from './DashboardLayout'
+import EditUserPage from './EditUserPage'
 
 //   Improve this test with help from the Redwood Testing Doc:
 //   https://redwoodjs.com/docs/testing#testing-pages-layouts
 
-describe('DashboardLayout', () => {
+describe('EditUserPage', () => {
   it('renders successfully', () => {
-    mockCurrentUser({
-      id: 1,
-      email: 'Test User',
-      firstName: 'Test',
-      lastName: 'User',
-    })
-
     expect(() => {
-      render(<DashboardLayout />)
+      render(<EditUserPage />)
     }).not.toThrow()
   })
 })

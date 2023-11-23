@@ -8,11 +8,21 @@ export const schema = gql`
     resetTokenExpiresAt: DateTime
     # credentials: [UserCredential]!
     Deck: [Deck]!
+    firstName: String
+    lastName: String
+  }
+
+  type EditUser {
+    id: Int!
+    email: String!
+    firstName: String
+    lastName: String
   }
 
   type Query {
     users: [User!]! @requireAuth
     user(id: Int!): User @requireAuth
+    editUser(id: Int!): EditUser @requireAuth
   }
 
   input CreateUserInput {
@@ -29,6 +39,8 @@ export const schema = gql`
     salt: String
     resetToken: String
     resetTokenExpiresAt: DateTime
+    firstName: String
+    lastName: String
   }
 
   type Mutation {
