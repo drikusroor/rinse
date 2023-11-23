@@ -1,6 +1,7 @@
 import { FaPlusCircle, FaUserCircle } from 'react-icons/fa'
 
 import { Link, routes } from '@redwoodjs/router'
+import { Toaster } from '@redwoodjs/web/dist/toast'
 
 import { useAuth } from 'src/auth'
 
@@ -130,6 +131,14 @@ const DashboardLayout = ({
                         </>
                       ) : (
                         <>
+                          <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                            <Link
+                              to={routes.editUser()}
+                              className="block w-full text-left text-gray-700 hover:text-gray-900"
+                            >
+                              Account
+                            </Link>
+                          </li>
                           <li
                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             role="menuitem"
@@ -173,6 +182,7 @@ const DashboardLayout = ({
       </header>
 
       <main>
+        <Toaster />
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="px-4 py-6 sm:px-0">
             <div className="">{children}</div>
