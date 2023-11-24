@@ -22,7 +22,7 @@ const EditUserForm = ({ user, onSave, loading, error }: EditUserFormProps) => {
     <Form<EditUser>
       onSubmit={onSubmit}
       error={error}
-      className="space-y-6 bg-white shadow sm:rounded-lg sm:px-10 sm:py-8"
+      className="space-y-6 rounded bg-white p-2 shadow sm:rounded-lg sm:px-10 sm:py-8"
     >
       <div>
         <label
