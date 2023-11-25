@@ -1,10 +1,10 @@
+import type { CreatePlayConfigurationInput } from 'types/graphql'
+
 import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import PlayConfigurationForm from 'src/components/PlayConfiguration/PlayConfigurationForm'
-
-import type { CreatePlayConfigurationInput } from 'types/graphql'
 
 const CREATE_PLAY_CONFIGURATION_MUTATION = gql`
   mutation CreatePlayConfigurationMutation(

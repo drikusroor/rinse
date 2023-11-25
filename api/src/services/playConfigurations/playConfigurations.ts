@@ -20,6 +20,10 @@ export const playConfiguration: QueryResolvers['playConfiguration'] = ({
 
 export const createPlayConfiguration: MutationResolvers['createPlayConfiguration'] =
   ({ input }) => {
+    if (input.userId !== context.currentUser.id) {
+      throw new Error('Unauthorized')
+    }
+
     return db.playConfiguration.create({
       data: input,
     })
@@ -27,6 +31,10 @@ export const createPlayConfiguration: MutationResolvers['createPlayConfiguration
 
 export const updatePlayConfiguration: MutationResolvers['updatePlayConfiguration'] =
   ({ id, input }) => {
+    if (input.userId !== context.currentUser.id) {
+      throw new Error('Unauthorized')
+    }
+
     return db.playConfiguration.update({
       data: input,
       where: { id },

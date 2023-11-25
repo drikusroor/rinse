@@ -1,3 +1,8 @@
+import type {
+  EditPlayConfigurationById,
+  UpdatePlayConfigurationInput,
+} from 'types/graphql'
+
 import {
   Form,
   FormError,
@@ -9,12 +14,9 @@ import {
   RadioField,
   Submit,
 } from '@redwoodjs/forms'
-
-import type {
-  EditPlayConfigurationById,
-  UpdatePlayConfigurationInput,
-} from 'types/graphql'
 import type { RWGqlError } from '@redwoodjs/forms'
+
+import { useAuth } from 'src/auth'
 
 type FormPlayConfiguration = NonNullable<
   EditPlayConfigurationById['playConfiguration']
@@ -31,6 +33,8 @@ interface PlayConfigurationFormProps {
 }
 
 const PlayConfigurationForm = (props: PlayConfigurationFormProps) => {
+  const { currentUser } = useAuth()
+
   const onSubmit = (data: FormPlayConfiguration) => {
     props.onSave(data, props?.playConfiguration?.id)
   }
@@ -55,8 +59,9 @@ const PlayConfigurationForm = (props: PlayConfigurationFormProps) => {
 
         <NumberField
           name="userId"
-          defaultValue={props.playConfiguration?.userId}
-          className="rw-input"
+          defaultValue={props.playConfiguration?.userId ?? currentUser?.id}
+          readOnly
+          className="rw-input bg-gray-100"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
         />
