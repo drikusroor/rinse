@@ -9,8 +9,8 @@ generator client {
 }
 
 model User {
-  id                  Int              @id @default(autoincrement())
-  email               String           @unique
+  id                  Int                 @id @default(autoincrement())
+  email               String              @unique
   hashedPassword      String
   salt                String
   resetToken          String?
@@ -20,6 +20,7 @@ model User {
   PlaySession         PlaySession[]
   firstName           String?
   lastName            String?
+  layConfigurations   PlayConfiguration[]
 }
 
 model UserCredential {
@@ -101,4 +102,23 @@ model FlashcardInteraction {
   correct       Boolean
   playSessionId Int
   playSession   PlaySession @relation(fields: [playSessionId], references: [id])
+}
+
+enum AnswerMode {
+  Manual // Default, user has to click to reveal answer
+  Text // User has to type in the answer
+}
+
+model PlayConfiguration {
+  id                     Int        @id @default(autoincrement())
+  userId                 Int
+  user                   User       @relation(fields: [userId], references: [id])
+  name                   String
+  createdAt              DateTime   @default(now())
+  updatedAt              DateTime   @updatedAt
+  timeUntilNextFlashcard Int // In milliseconds
+  amountOfFlashcards     Int? // If null, all flashcards will be played, otherwise only the specified amount (or more)
+  firstFlashcardIndex    Boolean? // If true, the first flashcard will be shown first, otherwise it will be random
+  answerMode             AnswerMode // Default: Manual
+  inverse                Boolean // Default: false, if true, the front and back of the flashcard will be switched
 }
