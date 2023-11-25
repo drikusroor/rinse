@@ -20,6 +20,7 @@ const Routes = () => {
         <Set wrap={DashboardLayout} title="Account">
           <Route path="/account" page={EditUserPage} name="editUser" />
         </Set>
+
         <Set wrap={DashboardLayout} title="Play!">
           <Route path="/" page={PlayPage} name="playOverview" />
           <Route path="/play/decks/{id:Int}" page={PlayPage} name="playDeck" />
@@ -42,6 +43,12 @@ const Routes = () => {
           <Route path="/flashcards/{id:Int}/edit" page={FlashcardEditFlashcardPage} name="editFlashcard" />
           <Route path="/flashcards/{id:Int}" page={FlashcardFlashcardPage} name="flashcard" />
           <Route path="/flashcards" page={FlashcardFlashcardsPage} name="flashcards" />
+        </Set>
+        <Set wrap={DashboardLayout} title="PlayConfigurations" titleTo="playConfigurations" buttonLabel="New PlayConfiguration" buttonTo="newPlayConfiguration">
+          <Route path="/play-configurations/new" page={PlayConfigurationNewPlayConfigurationPage} name="newPlayConfiguration" />
+          <Route path="/play-configurations/{id:Int}/edit" page={PlayConfigurationEditPlayConfigurationPage} name="editPlayConfiguration" />
+          <Route path="/play-configurations/{id:Int}" page={PlayConfigurationPlayConfigurationPage} name="playConfiguration" />
+          <Route path="/play-configurations" page={PlayConfigurationPlayConfigurationsPage} name="playConfigurations" />
         </Set>
         <Set wrap={DashboardLayout} title="Decks" addNewButton={{ to: routes.newDeck, label: 'New Deck' }}>
           <Route path="/decks/new" page={DeckNewDeckPage} name="newDeck" />

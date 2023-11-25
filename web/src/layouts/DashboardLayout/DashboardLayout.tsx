@@ -67,6 +67,13 @@ const DashboardLayout = ({
                   >
                     Decks
                   </Link>
+                  <Link
+                    to={routes.playConfigurations()}
+                    className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                  >
+                    Play Configurations
+                  </Link>
+
                   {/* Disabled until the feature is ready */}
                   {/* <Link
                     to={routes.studySets()}
