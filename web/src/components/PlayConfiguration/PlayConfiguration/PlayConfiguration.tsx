@@ -1,13 +1,13 @@
+import type {
+  DeletePlayConfigurationMutationVariables,
+  FindPlayConfigurationById,
+} from 'types/graphql'
+
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { checkboxInputTag, formatEnum, timeTag } from 'src/lib/formatters'
-
-import type {
-  DeletePlayConfigurationMutationVariables,
-  FindPlayConfigurationById,
-} from 'types/graphql'
 
 const DELETE_PLAY_CONFIGURATION_MUTATION = gql`
   mutation DeletePlayConfigurationMutation($id: Int!) {

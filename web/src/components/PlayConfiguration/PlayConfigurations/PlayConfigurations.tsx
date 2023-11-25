@@ -1,3 +1,8 @@
+import type {
+  DeletePlayConfigurationMutationVariables,
+  FindPlayConfigurations,
+} from 'types/graphql'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
@@ -9,11 +14,6 @@ import {
   timeTag,
   truncate,
 } from 'src/lib/formatters'
-
-import type {
-  DeletePlayConfigurationMutationVariables,
-  FindPlayConfigurations,
-} from 'types/graphql'
 
 const DELETE_PLAY_CONFIGURATION_MUTATION = gql`
   mutation DeletePlayConfigurationMutation($id: Int!) {
