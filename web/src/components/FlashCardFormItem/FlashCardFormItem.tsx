@@ -71,9 +71,9 @@ const FlashCardFormItem = ({
             <input
               name="front"
               className="rounded-lg border p-3"
-              defaultValue={flashcard?.front.join('\n')}
+              defaultValue={flashcard?.front.join(';')}
               onChange={(e) => {
-                const front = e.target.value.split('\n')
+                const front = e.target.value.split(';')
                 setUpdateFlashcardFormData({
                   ...updateFlashcardFormData,
                   front,
@@ -90,9 +90,9 @@ const FlashCardFormItem = ({
             <input
               name="back"
               className="rounded-lg border p-3"
-              defaultValue={flashcard?.back.join('\n')}
+              defaultValue={flashcard?.back.join(';')}
               onChange={(e) => {
-                const back = e.target.value.split('\n')
+                const back = e.target.value.split(';')
                 setUpdateFlashcardFormData({ ...updateFlashcardFormData, back })
               }}
               placeholder="Back of the flashcard"
