@@ -41,6 +41,8 @@ describe('playConfigurations', () => {
   scenario(
     'creates a playConfiguration',
     async (scenario: StandardScenario) => {
+      mockCurrentUser({ id: scenario.playConfiguration.two.userId })
+
       const result = await createPlayConfiguration({
         input: {
           userId: scenario.playConfiguration.two.userId,
@@ -64,6 +66,8 @@ describe('playConfigurations', () => {
   scenario(
     'updates a playConfiguration',
     async (scenario: StandardScenario) => {
+      mockCurrentUser({ id: scenario.playConfiguration.one.userId })
+
       const original = (await playConfiguration({
         id: scenario.playConfiguration.one.id,
       })) as PlayConfiguration

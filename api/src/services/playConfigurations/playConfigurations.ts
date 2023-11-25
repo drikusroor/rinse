@@ -30,8 +30,17 @@ export const createPlayConfiguration: MutationResolvers['createPlayConfiguration
   }
 
 export const updatePlayConfiguration: MutationResolvers['updatePlayConfiguration'] =
-  ({ id, input }) => {
-    if (input.userId !== context.currentUser.id) {
+  async ({ id, input }) => {
+    const existingPlayConfiguration = await db.playConfiguration.findUnique({
+      where: { id },
+      include: { user: true },
+    })
+
+    if (!existingPlayConfiguration) {
+      throw new Error('PlayConfiguration not found')
+    }
+
+    if (existingPlayConfiguration.userId !== context.currentUser.id) {
       throw new Error('Unauthorized')
     }
 
