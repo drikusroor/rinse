@@ -14,7 +14,9 @@ import {
   useMutation,
 } from '@redwoodjs/web'
 
-import PlayFlashcards from '../PlayFlashcards/PlayFlashcards'
+import PlayFlashcards, {
+  PlayConfiguration,
+} from '../PlayFlashcards/PlayFlashcards'
 
 export const QUERY = gql`
   query FindPlayDeckQuery($id: Int!) {
