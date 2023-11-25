@@ -44,17 +44,18 @@ const Routes = () => {
           <Route path="/flashcards/{id:Int}" page={FlashcardFlashcardPage} name="flashcard" />
           <Route path="/flashcards" page={FlashcardFlashcardsPage} name="flashcards" />
         </Set>
-        <Set wrap={DashboardLayout} title="PlayConfigurations" titleTo="playConfigurations" buttonLabel="New PlayConfiguration" buttonTo="newPlayConfiguration">
-          <Route path="/play-configurations/new" page={PlayConfigurationNewPlayConfigurationPage} name="newPlayConfiguration" />
-          <Route path="/play-configurations/{id:Int}/edit" page={PlayConfigurationEditPlayConfigurationPage} name="editPlayConfiguration" />
-          <Route path="/play-configurations/{id:Int}" page={PlayConfigurationPlayConfigurationPage} name="playConfiguration" />
-          <Route path="/play-configurations" page={PlayConfigurationPlayConfigurationsPage} name="playConfigurations" />
-        </Set>
+
         <Set wrap={DashboardLayout} title="Decks" addNewButton={{ to: routes.newDeck, label: 'New Deck' }}>
           <Route path="/decks/new" page={DeckNewDeckPage} name="newDeck" />
           <Route path="/decks/{id:Int}/edit" page={DeckEditDeckPage} name="editDeck" />
           <Route path="/decks/{id:Int}" page={DeckDeckPage} name="deck" />
           <Route path="/decks" page={DeckDecksPage} name="decks" />
+        </Set>
+        <Set wrap={DashboardLayout} title="PlayConfigurations" titleTo="playConfigurations" addNewButton={{ to: routes.newPlayConfiguration, label: 'New Play Configuration' }}>
+          <Route path="/play-configurations/new" page={PlayConfigurationNewPlayConfigurationPage} name="newPlayConfiguration" />
+          <Route path="/play-configurations/{id:Int}/edit" page={PlayConfigurationEditPlayConfigurationPage} name="editPlayConfiguration" />
+          <Route path="/play-configurations/{id:Int}" page={PlayConfigurationPlayConfigurationPage} name="playConfiguration" />
+          <Route path="/play-configurations" page={PlayConfigurationPlayConfigurationsPage} name="playConfigurations" />
         </Set>
       </PrivateSet>
       <Set wrap={DashboardLayout}>
