@@ -5,6 +5,7 @@ export const schema = gql`
     teacherId: Int!
     student: User!
     studentId: Int!
+    accepted: Boolean!
   }
 
   type Query {
@@ -23,8 +24,12 @@ export const schema = gql`
   }
 
   input RequestConnectToTeacherInput {
-    id: Int!
-    email: String!
+    id: Int! # Student ID
+    email: String! # Teacher email
+  }
+
+  input AcceptConnectToTeacherInput {
+    id: Int! # Request ID
   }
 
   type Mutation {
@@ -35,7 +40,8 @@ export const schema = gql`
       input: UpdateTeacherStudentInput!
     ): TeacherStudent! @requireAuth
     deleteTeacherStudent(id: Int!): TeacherStudent! @requireAuth
-    requestConnectToTeacher(input: RequestConnectToTeacherInput!): Notification
-      @requireAuth
+    requestConnectToTeacher(
+      input: RequestConnectToTeacherInput!
+    ): TeacherStudent! @requireAuth
   }
 `
