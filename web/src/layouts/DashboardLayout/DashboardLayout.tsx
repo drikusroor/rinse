@@ -5,6 +5,7 @@ import { Toaster } from '@redwoodjs/web/dist/toast'
 
 import { useAuth } from 'src/auth'
 import Avatar from 'src/components/Avatar/Avatar'
+import UserNotificationsCell from 'src/components/UserNotificationsCell/UserNotificationsCell'
 
 interface AddNewButton {
   to: () => string
@@ -84,7 +85,8 @@ const DashboardLayout = ({
                 </div>
               )}
             </div>
-            <div className="flex items-center md:space-x-6">
+            <div className="flex items-center gap-2 md:space-x-6">
+              <UserNotificationsCell />
               <div className="relative flex-shrink-0">
                 <div className="group inline-block text-left">
                   <Avatar user={currentUser}></Avatar>

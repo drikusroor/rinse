@@ -30,6 +30,9 @@ export const editUser: QueryResolvers['editUser'] = ({ id }) => {
 
   return db.user.findUnique({
     where: { id },
+    include: {
+      teachers: true,
+    },
   })
 }
 
@@ -53,10 +56,22 @@ export const deleteUser: MutationResolvers['deleteUser'] = ({ id }) => {
 }
 
 export const User: UserRelationResolvers = {
-  credentials: (_obj, { root }) => {
-    return db.user.findUnique({ where: { id: root?.id } }).credentials()
+  deck: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).deck()
   },
-  Deck: (_obj, { root }) => {
-    return db.user.findUnique({ where: { id: root?.id } }).Deck()
+  PlaySession: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).PlaySession()
+  },
+  layConfigurations: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).layConfigurations()
+  },
+  teachers: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).teachers()
+  },
+  students: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).students()
+  },
+  notifications: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).notifications()
   },
 }
