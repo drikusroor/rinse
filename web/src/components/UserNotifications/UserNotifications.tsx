@@ -39,6 +39,14 @@ const UserNotifications = ({
       </button>
 
       {open && (
+        <div
+          className="fixed inset-0 z-10 h-full w-full"
+          onClick={() => setOpen(false)}
+          aria-hidden="true"
+        ></div>
+      )}
+
+      {open && (
         <div className="absolute right-0 top-full z-10 h-96 overflow-y-auto group-hover:block">
           <ul
             className="mt-2 w-64 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5"
