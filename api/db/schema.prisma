@@ -29,11 +29,12 @@ model User {
 }
 
 model TeacherStudent {
-  id        Int  @id @default(autoincrement())
-  teacher   User @relation("StudentTeachers", fields: [teacherId], references: [id])
+  id        Int     @id @default(autoincrement())
+  teacher   User    @relation("StudentTeachers", fields: [teacherId], references: [id])
   teacherId Int
-  student   User @relation("TeacherStudents", fields: [studentId], references: [id])
+  student   User    @relation("TeacherStudents", fields: [studentId], references: [id])
   studentId Int
+  accepted  Boolean
 
   @@unique([teacherId, studentId])
 }
