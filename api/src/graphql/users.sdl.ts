@@ -7,12 +7,16 @@ export const schema = gql`
     resetToken: String
     resetTokenExpiresAt: DateTime
     # credentials: [UserCredential]!
-    decks: [Deck]!
+    deck: [Deck]!
+    PlaySession: [PlaySession]!
     firstName: String
     lastName: String
+    layConfigurations: [PlayConfiguration]!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    teachers: [TeacherStudent]!
+    students: [TeacherStudent]!
     notifications: [Notification]!
-    teachers: [User]!
-    students: [User]!
   }
 
   type EditUser {
@@ -34,6 +38,8 @@ export const schema = gql`
     salt: String!
     resetToken: String
     resetTokenExpiresAt: DateTime
+    firstName: String
+    lastName: String
   }
 
   input UpdateUserInput {
