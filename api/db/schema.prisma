@@ -29,12 +29,13 @@ model User {
 }
 
 model TeacherStudent {
+  id        Int  @id @default(autoincrement())
   teacher   User @relation("StudentTeachers", fields: [teacherId], references: [id])
   teacherId Int
   student   User @relation("TeacherStudents", fields: [studentId], references: [id])
   studentId Int
 
-  @@id([teacherId, studentId])
+  @@unique([teacherId, studentId])
 }
 
 model UserCredential {
