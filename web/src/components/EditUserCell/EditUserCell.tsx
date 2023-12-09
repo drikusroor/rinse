@@ -10,7 +10,6 @@ import {
 } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import ConnectToTeacherForm from '../ConnectToTeacherForm/ConnectToTeacherForm'
 import EditUserForm from '../EditUserForm/EditUserForm'
 import Teachers from '../Teachers/Teachers'
 

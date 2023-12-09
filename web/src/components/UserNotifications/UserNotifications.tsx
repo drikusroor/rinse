@@ -1,7 +1,6 @@
 import { FaBell } from 'react-icons/fa'
 import { Notification } from 'types/graphql'
 
-import { timeTag } from 'src/lib/formatters'
 import { dateStringToTimeAgo } from 'src/lib/time-ago'
 
 interface UserNotificationsProps {

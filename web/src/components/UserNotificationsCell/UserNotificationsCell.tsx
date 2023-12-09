@@ -1,4 +1,3 @@
-import { FaBell } from 'react-icons/fa'
 import type { UserNotificationsQuery } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
