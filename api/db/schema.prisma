@@ -121,4 +121,5 @@ model PlayConfiguration {
   firstFlashcardIndex    Boolean? // If true, the first flashcard will be shown first, otherwise it will be random
   answerMode             AnswerMode // Default: Manual
   inverse                Boolean // Default: false, if true, the front and back of the flashcard will be switched
+  levenstheinDistance    Int? // Default: null, if null, the answer has to be exactly the same, otherwise the answer will be checked with the levensthein distance
 }
