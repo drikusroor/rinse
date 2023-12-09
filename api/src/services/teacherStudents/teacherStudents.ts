@@ -80,7 +80,7 @@ export const requestConnectToTeacher: MutationResolvers['requestConnectToTeacher
         ? `${user.firstName} ${user.lastName}`
         : user.email
 
-    return db.notification.create({
+    await db.notification.create({
       data: {
         title: 'New connection request',
         message: `${name} has requested to connect to you. Go to your profile to accept or reject the request.`,
@@ -90,6 +90,14 @@ export const requestConnectToTeacher: MutationResolvers['requestConnectToTeacher
             id: teacher.id,
           },
         },
+      },
+    })
+
+    return db.teacherStudent.create({
+      data: {
+        teacherId: teacher.id,
+        studentId: user.id,
+        accepted: false,
       },
     })
   }
