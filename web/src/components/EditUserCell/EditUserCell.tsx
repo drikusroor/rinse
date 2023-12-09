@@ -10,7 +10,9 @@ import {
 } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import ConnectToTeacherForm from '../ConnectToTeacherForm/ConnectToTeacherForm'
 import EditUserForm from '../EditUserForm/EditUserForm'
+import Teachers from '../Teachers/Teachers'
 
 export const QUERY = gql`
   query FindEditUserQuery($id: Int!) {
@@ -19,6 +21,9 @@ export const QUERY = gql`
       email
       firstName
       lastName
+      teachers {
+        id
+      }
     }
   }
 `
@@ -30,6 +35,16 @@ const UPDATE_USER_MUTATION = gql`
       email
       firstName
       lastName
+    }
+  }
+`
+
+const REQUEST_CONNECT_TO_TEACHER_MUTATION = gql`
+  mutation RequestConnectToTeacherMutation(
+    $input: RequestConnectToTeacherInput!
+  ) {
+    requestConnectToTeacher(input: $input) {
+      id
     }
   }
 `
@@ -58,14 +73,35 @@ export const Success = ({
     refetchQueries: [{ query: QUERY, variables: { id } }],
   })
 
+  const [requestConnectToTeacher] = useMutation(
+    REQUEST_CONNECT_TO_TEACHER_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Connected to teacher')
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+      refetchQueries: [{ query: QUERY, variables: { id } }],
+    }
+  )
+
   return (
-    <EditUserForm
-      user={editUser}
-      onSave={(input) => {
-        updateUser({ variables: { id, input } })
-      }}
-      error={error}
-      loading={loading}
-    />
+    <>
+      <EditUserForm
+        user={editUser}
+        onSave={(input) => {
+          updateUser({ variables: { id, input } })
+        }}
+        error={error}
+        loading={loading}
+      />
+      <Teachers
+        teachers={editUser.teachers.map((t) => t.teacher)}
+        onRequestConnectToTeacher={(email) =>
+          requestConnectToTeacher({ variables: { input: { email, id } } })
+        }
+      />
+    </>
   )
 }

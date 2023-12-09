@@ -30,6 +30,9 @@ export const editUser: QueryResolvers['editUser'] = ({ id }) => {
 
   return db.user.findUnique({
     where: { id },
+    include: {
+      teachers: true,
+    },
   })
 }
 
@@ -53,9 +56,6 @@ export const deleteUser: MutationResolvers['deleteUser'] = ({ id }) => {
 }
 
 export const User: UserRelationResolvers = {
-  credentials: (_obj, { root }) => {
-    return db.user.findUnique({ where: { id: root?.id } }).credentials()
-  },
   deck: (_obj, { root }) => {
     return db.user.findUnique({ where: { id: root?.id } }).deck()
   },
