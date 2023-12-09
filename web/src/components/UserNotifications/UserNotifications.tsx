@@ -1,6 +1,9 @@
 import { FaBell } from 'react-icons/fa'
 import { Notification } from 'types/graphql'
 
+import { timeTag } from 'src/lib/formatters'
+import { dateStringToTimeAgo } from 'src/lib/time-ago'
+
 interface UserNotificationsProps {
   userNotifications: Pick<
     Notification,
@@ -18,9 +21,9 @@ const UserNotifications = ({
   const [open, setOpen] = React.useState(false)
 
   return (
-    <>
+    <div className="relative">
       <button
-        className="relative flex items-center justify-center rounded-full bg-gradient-to-br from-sand to-forest text-sm text-white transition hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        className="flex items-center justify-center rounded-full bg-gradient-to-br from-sand to-forest text-sm text-white transition hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
         onClick={() => setOpen(!open)}
         aria-expanded="false"
         aria-haspopup="true"
@@ -36,35 +39,38 @@ const UserNotifications = ({
       </button>
 
       {open && (
-        <div className="absolute right-0 z-10 hidden group-hover:block">
+        <div className="absolute right-0 top-full z-10 h-96 overflow-y-auto group-hover:block">
           <ul
-            className="mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5"
+            className="mt-2 w-64 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5"
             role="menu"
             aria-orientation="vertical"
             aria-labelledby="user-menu"
           >
-            {userNotifications.map((notification) => (
+            {userNotifications.map((notification, i) => (
               <li
                 key={notification.id}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                className="my-2 block px-4 text-sm text-gray-700 hover:bg-gray-100"
                 role="menuitem"
               >
                 <a
                   href={notification.url}
                   className="block w-full text-gray-700 hover:text-gray-900"
                 >
-                  <div className="font-medium">{notification.title}</div>
-                  <div className="text-sm">{notification.message}</div>
+                  <div className="font-semibold">{notification.title}</div>
+                  <div className="text-xs">{notification.message}</div>
                   <div className="text-xs text-gray-500">
-                    {notification.createdAt}
+                    {dateStringToTimeAgo(notification.createdAt)}
                   </div>
                 </a>
+                {i < userNotifications.length - 1 && (
+                  <div className="mt-2 border-b border-gray-200"></div>
+                )}
               </li>
             ))}
           </ul>
         </div>
       )}
-    </>
+    </div>
   )
 }
 

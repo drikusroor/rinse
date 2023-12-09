@@ -6,6 +6,8 @@ interface AvatarProps {
 }
 
 const Avatar = ({ user }: AvatarProps) => {
+  if (!user) return <FaUserCircle className="h-8 w-8 text-gray-500" />
+
   const { firstName, email } = user
 
   const firstChar = firstName

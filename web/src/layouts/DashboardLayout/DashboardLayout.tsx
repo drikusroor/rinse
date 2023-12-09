@@ -85,7 +85,7 @@ const DashboardLayout = ({
                 </div>
               )}
             </div>
-            <div className="flex items-center md:space-x-6">
+            <div className="flex items-center gap-2 md:space-x-6">
               <UserNotificationsCell />
               <div className="relative flex-shrink-0">
                 <div className="group inline-block text-left">
