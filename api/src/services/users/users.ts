@@ -56,7 +56,16 @@ export const User: UserRelationResolvers = {
   credentials: (_obj, { root }) => {
     return db.user.findUnique({ where: { id: root?.id } }).credentials()
   },
-  Deck: (_obj, { root }) => {
-    return db.user.findUnique({ where: { id: root?.id } }).Deck()
+  deck: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).deck()
+  },
+  notifications: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).notifications()
+  },
+  teachers: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).teachers()
+  },
+  students: (_obj, { root }) => {
+    return db.user.findUnique({ where: { id: root?.id } }).students()
   },
 }

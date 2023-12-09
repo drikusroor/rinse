@@ -15,7 +15,7 @@ const Avatar = ({ user }: AvatarProps) => {
   return (
     <button
       type="button"
-      className="flex rounded-full bg-sand text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      className="flex rounded-full bg-sand text-sm transition hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       id="user-menu"
       aria-expanded="false"
       aria-haspopup="true"
