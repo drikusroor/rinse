@@ -25,6 +25,7 @@ model User {
   updatedAt           DateTime            @default(now()) @updatedAt
   teachers            TeacherStudent[]    @relation("StudentTeachers")
   students            TeacherStudent[]    @relation("TeacherStudents")
+  notifications       Notification[]
 }
 
 model TeacherStudent {
@@ -134,4 +135,16 @@ model PlayConfiguration {
   firstFlashcardIndex    Boolean? // If true, the first flashcard will be shown first, otherwise it will be random
   answerMode             AnswerMode // Default: Manual
   inverse                Boolean // Default: false, if true, the front and back of the flashcard will be switched
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  url       String?
 }
