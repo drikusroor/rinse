@@ -1,12 +1,19 @@
 /*
   Warnings:
 
-  - Added the required column `updatedAt` to the `User` table without a default value. This is not possible if the table is not empty.
+  - The `front` column on the `Flashcard` table would be dropped and recreated. This will lead to data loss if there is data in the column.
+  - The `back` column on the `Flashcard` table would be dropped and recreated. This will lead to data loss if there is data in the column.
 
 */
 -- AlterTable
+ALTER TABLE "Flashcard" DROP COLUMN "front",
+ADD COLUMN     "front" TEXT[],
+DROP COLUMN "back",
+ADD COLUMN     "back" TEXT[];
+
+-- AlterTable
 ALTER TABLE "User" ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL;
+ADD COLUMN     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 -- CreateTable
 CREATE TABLE "TeacherStudent" (
