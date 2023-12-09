@@ -22,6 +22,12 @@ export const QUERY = gql`
       lastName
       teachers {
         id
+        teacher {
+          id
+          email
+          firstName
+          lastName
+        }
       }
     }
   }
@@ -44,6 +50,13 @@ const REQUEST_CONNECT_TO_TEACHER_MUTATION = gql`
   ) {
     requestConnectToTeacher(input: $input) {
       id
+      accepted
+      teacher {
+        id
+        email
+        firstName
+        lastName
+      }
     }
   }
 `
@@ -96,7 +109,7 @@ export const Success = ({
         loading={loading}
       />
       <Teachers
-        teachers={editUser.teachers.map((t) => t.teacher)}
+        teachers={editUser.teachers}
         onRequestConnectToTeacher={(email) =>
           requestConnectToTeacher({ variables: { input: { email, id } } })
         }
